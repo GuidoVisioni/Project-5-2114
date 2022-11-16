@@ -20,6 +20,9 @@ public class SinglyLinkedListTest extends TestCase {
         list = new SinglyLinkedList<String>();
     }
     
+    /**
+     * tests both forms of the add method on valid indecies and data
+     */
     public void testAdd() {
         assertTrue(list.isEmpty());
         list.add("meow");
@@ -37,6 +40,10 @@ public class SinglyLinkedListTest extends TestCase {
         assertEquals(list.getLength(), 6);
     }
     
+    /**
+     * test that both versions of the add method throw the appropriate
+     * exceptions when given invalid indecies or data
+     */
     public void testAddException() {
         // for null parameter on add(T newEntry)
         Exception exception = null;
@@ -93,6 +100,9 @@ public class SinglyLinkedListTest extends TestCase {
             exception4 instanceof IndexOutOfBoundsException);
     }
     
+    /**
+     * tests contains for multiple strings
+     */
     public void testContains() {
         list.add("meow");
         assertTrue(list.contains("meow"));
@@ -106,14 +116,17 @@ public class SinglyLinkedListTest extends TestCase {
         assertFalse(list.contains("bug"));
     }
     
+    /**
+     * tests getEntry for valid indecies
+     */
     public void testGetEntry() {
         list.add("meow");
         list.add("woof");
         list.add("moon");
         assertEquals(list.getLength(), 3);
-        assertEquals(list.getEntry(0), "meow");
+        assertEquals(list.getEntry(0), "moon");
         assertEquals(list.getEntry(1), "woof");
-        assertEquals(list.getEntry(2), "moon");
+        assertEquals(list.getEntry(2), "meow");
         assertEquals(list.getLength(), 3);
         list.clear();
         assertTrue(list.isEmpty());
@@ -121,6 +134,10 @@ public class SinglyLinkedListTest extends TestCase {
         assertEquals(list.getEntry(0), "meow");
     }
     
+    /**
+     * tests getEntry for invalid indecies and confirms that it is throwing the 
+     * approriate exceptions
+     */
     public void testGetEntryExceptions() {
         // tests for negative index
         Exception exception = null;
@@ -147,31 +164,37 @@ public class SinglyLinkedListTest extends TestCase {
             exception2 instanceof IndexOutOfBoundsException);
     }
     
+    /**
+     * tests the remove method for valid indecies
+     */
     public void testRemove() {
         list.add("meow");
         list.add("woof");
         list.add(":3");
         assertEquals(list.getLength(), 3);
-        assertEquals(list.remove(0), "meow");
+        assertEquals(list.remove(0), ":3");
         assertEquals(list.getLength(), 2);
-        assertFalse(list.contains("meow"));
+        assertFalse(list.contains(":3"));
         assertTrue(list.contains("woof"));
-        assertTrue(list.contains(":3"));    
+        assertTrue(list.contains("meow"));    
         assertEquals(list.getEntry(0), "woof");
         list.add("door");
         list.add("bug");
         assertEquals(list.getLength(), 4);
-        assertEquals(list.remove(1), ":3");
+        assertEquals(list.remove(1), "door");
         assertEquals(list.getLength(), 3);
         assertFalse(list.contains(":3"));
-        assertEquals(list.getEntry(0), "woof");
-        assertEquals(list.remove(2), "bug");
+        assertEquals(list.getEntry(0), "bug");
+        assertEquals(list.remove(2), "meow");
         assertEquals(list.getLength(), 2);
-        assertFalse(list.contains("bug"));
-        assertEquals(list.getEntry(0), "woof");
-        assertEquals(list.getEntry(1), "door");
+        assertFalse(list.contains("meow"));
+        assertEquals(list.getEntry(0), "bug");
+        assertEquals(list.getEntry(1), "woof");
     }
     
+    /**
+     * tests that remove is throwing the correct exceptions for invalid indecies
+     */
     public void testRemoveException() {
         // tests for negative index
         Exception exception = null;
@@ -198,25 +221,32 @@ public class SinglyLinkedListTest extends TestCase {
             exception2 instanceof IndexOutOfBoundsException);
     }
     
+    /**
+     * tests that replace is replacing the correct indecies with valid data
+     */
     public void testReplace() {
         list.add("meow");
         list.add("woof");
         list.add(":3");
         assertEquals(list.getLength(), 3);
-        assertEquals(list.replace(0, "bug"), "meow");
+        assertEquals(list.replace(0, "bug"), ":3");
         assertEquals(list.getEntry(0), "bug");
-        assertFalse(list.contains("meow"));
+        assertFalse(list.contains(":3"));
         assertEquals(list.getLength(), 3);
         assertEquals(list.replace(1, "bird"), "woof");
         assertEquals(list.getEntry(1), "bird");
         assertFalse(list.contains("woof"));
         assertEquals(list.getLength(), 3);
-        assertEquals(list.replace(2, "plant"), ":3");
+        assertEquals(list.replace(2, "plant"), "meow");
         assertEquals(list.getEntry(2), "plant");
-        assertFalse(list.contains(":3"));
+        assertFalse(list.contains("meow"));
         assertEquals(list.getLength(), 3);
     }
     
+    /**
+     * tests replace on out of bounds indecies and null parameters, and also
+     * confirms that it is throwing the appropriate exceptions
+     */
     public void testReplaceException() {
         list.add("meow");
         // tests for negative index
@@ -256,6 +286,10 @@ public class SinglyLinkedListTest extends TestCase {
             exception3 instanceof IllegalArgumentException);
     }
     
+    /**
+     * tests to array on an empty list, a list with 1 entry, and a list with
+     * multiple entries
+     */
     public void testToArray() {
         // for empty list
         Object[] empty = {};
@@ -273,11 +307,25 @@ public class SinglyLinkedListTest extends TestCase {
         Object[] size1 = {"meow", "woof"};
         Object[] size2 = {"meow", "woof", ":3", "door"};
         Object[] wrong = {"moon", "bug", "bird"};
-        list.add("woof");
-        list.add(":3");
+        list.add(1, "woof");
+        list.add(2, ":3");
         assertTrue(Arrays.equals(list.toArray(), multiple));
         assertFalse(Arrays.equals(list.toArray(), size1));
         assertFalse(Arrays.equals(list.toArray(), size2));
         assertFalse(Arrays.equals(list.toArray(), wrong));
+    }
+    
+    /**
+     * tests the iterator on valid inputs
+     */
+    public void testIterator() {
+        
+    }
+    
+    /**
+     * tests the iterator when it should be throwing an exception
+     */
+    public void testIteratorException() {
+        
     }
 }

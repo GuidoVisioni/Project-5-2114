@@ -1,5 +1,7 @@
 package prj5;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import list.ListInterface;
 
 /**
@@ -7,7 +9,7 @@ import list.ListInterface;
  * @author hsabbott
  * @version 2022.11.13
  */
-public class SinglyLinkedList<E> implements ListInterface<E> {
+public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
     private int size;
     private Node firstNode;
@@ -47,11 +49,8 @@ public class SinglyLinkedList<E> implements ListInterface<E> {
         }
         else
         {
-            Node curr = firstNode;
-            while (curr.getNext() != null) {
-                curr = curr.getNext();
-            }
-            curr.setNext(newNode);
+            newNode.setNext(firstNode);
+            firstNode = newNode;
         }
         size++;
     }
@@ -254,6 +253,51 @@ public class SinglyLinkedList<E> implements ListInterface<E> {
         return displayList;
     }
     
+    @Override
+    public Iterator<E> iterator() {
+        return new SLListIterator<E>();
+    }
+
+    private class SLListIterator<A> implements Iterator<E> {
+
+        private Node next;
+        private boolean calledNext;
+        
+        public SLListIterator() {
+            next = firstNode;
+            calledNext = false;
+        }
+        
+        /**
+         * checks if there is another entry in the list
+         * @return 
+         *     true if there is another entry, false if not
+         */
+        @Override
+        public boolean hasNext() {
+            return (next.getNext() != null);
+        }
+
+        /**
+         * moves the iterator one spot down 
+         * @return 
+         *     the value that was iterated past
+         * @throws NoSuchElementException
+         *     when there is no element to iterate over
+         */
+        @Override
+        public E next() {
+            E data = next.getData();
+            if (data == null) {
+                throw new NoSuchElementException();
+            }
+            next = next.getNext();
+            calledNext = true;
+            return data;
+        }
+        
+    }
+    
     /**
      * A node object for building the linked list
      * @author hsabbott
@@ -321,5 +365,4 @@ public class SinglyLinkedList<E> implements ListInterface<E> {
             return data;
         }
     }
-
 }
