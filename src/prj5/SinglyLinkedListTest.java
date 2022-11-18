@@ -2,6 +2,8 @@ package prj5;
 
 import java.util.Arrays;
 import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import student.TestCase;
 
 /**
@@ -319,13 +321,76 @@ public class SinglyLinkedListTest extends TestCase {
      * tests the iterator on valid inputs
      */
     public void testIterator() {
-        
+        list.add("meow");
+        list.add(1, "woof");
+        list.add(2, "door");
+        list.add(3, "how");
+        Iterator<String> iter = list.iterator();
+        assertTrue(iter.hasNext());
+        assertEquals(iter.next(), "meow");
+        assertTrue(iter.hasNext());
+        assertEquals(iter.next(), "woof");
+        assertTrue(iter.hasNext());
+        assertEquals(iter.next(), "door");
+        assertTrue(iter.hasNext());
+        assertEquals(iter.next(), "how");
+        assertFalse(iter.hasNext());
     }
     
     /**
      * tests the iterator when it should be throwing an exception
      */
     public void testIteratorException() {
+        // no elements
+        Iterator<String> iter1 = list.iterator();
+        assertFalse(iter1.hasNext());
+        Exception exception = null;
+        try {
+            iter1.next();
+            fail("next() failed to throw an exception when it should");
+        }
+        catch (Exception e) {
+            exception = e;
+        }
+        assertTrue("next() is throwing the wrong type of exceptions",
+            exception instanceof NoSuchElementException);
         
+        // 1 element
+        list.add("meow");
+        Iterator<String> iter2 = list.iterator();
+        assertTrue(iter2.hasNext());
+        assertEquals(iter2.next(), "meow");
+        assertFalse(iter2.hasNext());
+        try {
+            iter2.next();
+            fail("next() failed to throw an exception when it should");
+        }
+        catch (Exception e) {
+            exception = e;
+        }
+        assertTrue("next() is throwing the wrong type of exceptions",
+            exception instanceof NoSuchElementException);
+        
+        // multiple elements
+        list.add(1, "door");
+        list.add(2, "how");
+        assertEquals(list.getLength(), 3);
+        Iterator<String> iter3 = list.iterator();
+        assertTrue(iter3.hasNext());
+        assertEquals(iter3.next(), "meow");
+        assertTrue(iter3.hasNext());
+        assertEquals(iter3.next(), "door");
+        assertTrue(iter3.hasNext());
+        assertEquals(iter3.next(), "how");
+        assertFalse(iter3.hasNext());
+        try {
+            iter3.next();
+            fail("next() failed to throw an exception when it should");
+        }
+        catch (Exception e) {
+            exception = e;
+        }
+        assertTrue("next() is throwing the wrong type of exceptions",
+            exception instanceof NoSuchElementException);
     }
 }

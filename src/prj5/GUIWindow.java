@@ -4,6 +4,7 @@ import cs2.Button;
 import cs2.Shape;
 import cs2.TextShape;
 import cs2.Window;
+import cs2.WindowSide;
 import list.AList;
 
 public class GUIWindow {
@@ -14,8 +15,8 @@ public class GUIWindow {
     private Button quit;
     private Button traditionalEngage;
     private Button reachEngage;
-    private Button januaryButton;
-    private Button februaryButton;
+    private Button janButton;
+    private Button febButton;
     private Button marchButton;
     private Button quarterButton;
     private TextShape timeFrame;
@@ -23,6 +24,7 @@ public class GUIWindow {
     private TextShape sortingLabel;
     private AList<Shape> influencerBars;
     private AList<TextShape> barLabels;
+    private InfluencerCalculator data;
     
     /**
      * creates a new GUIWindow object
@@ -30,14 +32,56 @@ public class GUIWindow {
      *     the InfluencerCalculator being used to format the data
      */
     public GUIWindow(InfluencerCalculator calculator) {
+        window = new Window();
+        window.setTitle("hsabbott, rama04, gjvisioni25");
+        data = calculator;
+        
+        //initialize buttons
+        sortByName = new Button("Sort by Name");
+        sortByName.onClick("clickedSortName");
+        window.addButton(sortByName, WindowSide.NORTH);
+        
+        sortByEngagementRate = new Button("Sort by Engagement Rate");
+        sortByEngagementRate.onClick("clickedSortEngagement");
+        window.addButton(sortByEngagementRate, WindowSide.NORTH);
+        
+        quit = new Button("Quit");
+        quit.onClick("clickedQuit");
+        window.addButton(quit, WindowSide.NORTH);
+        
+        traditionalEngage = new Button("Traditional Engagement Rate");
+        traditionalEngage.onClick("clickedTradEngage");
+        window.addButton(traditionalEngage, WindowSide.WEST);
+        
+        reachEngage = new Button("Reach Engagement");
+        reachEngage.onClick("clickedReachEngage");
+        window.addButton(reachEngage, WindowSide.WEST);
+        
+        janButton = new Button("January");
+        janButton.onClick("clickedMonth");
+        window.addButton(janButton, WindowSide.SOUTH);
+        
+        febButton = new Button("February");
+        febButton.onClick("clickedMonth");
+        window.addButton(febButton, WindowSide.SOUTH);
+        
+        marchButton = new Button("March");
+        marchButton.onClick("clickedMonth");
+        window.addButton(marchButton, WindowSide.SOUTH);
+        
+        quarterButton = new Button("First Quarter");
+        quarterButton.onClick("clickedQuarter");
+        window.addButton(quarterButton, WindowSide.SOUTH);
+        
+        
         
     }
     
-    public void clickedSortByName(Button button) {
+    public void clickedSortName(Button button) {
         
     }
     
-    public void clickedSortByEngagementRate(Button button) {
+    public void clickedSortEngagement(Button button) {
         
     }
     
@@ -45,11 +89,11 @@ public class GUIWindow {
         
     }
     
-    public void clickedTraditionalEngagement(Button button) {
+    public void clickedTradEngage(Button button) {
         
     }
     
-    public void clickedReachEngagement(Button button) {
+    public void clickedReachEngage(Button button) {
         
     }
     
@@ -57,7 +101,7 @@ public class GUIWindow {
         
     }
     
-    public void clickedFirstQuarter(Button button) {
+    public void clickedQuarter(Button button) {
         
     }
     
@@ -66,6 +110,6 @@ public class GUIWindow {
     }
     
     private SinglyLinkedList<Influencer> getDataForMonth(String month) {
-        
+        return null;
     }
 }

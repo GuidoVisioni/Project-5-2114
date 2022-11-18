@@ -275,22 +275,22 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
          */
         @Override
         public boolean hasNext() {
-            return (next.getNext() != null);
+            return (next != null);
         }
 
         /**
          * moves the iterator one spot down 
          * @return 
-         *     the value that was iterated past
+         *     the next value
          * @throws NoSuchElementException
          *     when there is no element to iterate over
          */
         @Override
         public E next() {
-            E data = next.getData();
-            if (data == null) {
+            if (next == null) {
                 throw new NoSuchElementException();
             }
+            E data = next.getData();
             next = next.getNext();
             calledNext = true;
             return data;
