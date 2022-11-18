@@ -201,6 +201,10 @@ public class Influencer {
      *         Traditional Engagement
      */
     public double getEngagementTraditional() {
+        if(this.getFollowerCount() == 0)
+        {
+            return 0;
+        }
         return (this.getTotalEngagement() / this.getFollowerCount())
             * 100;
     }
@@ -213,6 +217,10 @@ public class Influencer {
      *         Reach Engagement
      */
     public double getEngagementReach() {
+        if(this.getReach() == 0)
+        {
+            return 0;
+        }
         return (this.getTotalEngagement() / this.getReach()) * 100;
     }
 

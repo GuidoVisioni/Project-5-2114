@@ -8,7 +8,7 @@ public class Input {
     public static void main(String[] args)
         throws FileNotFoundException,
         ParseException {
-        if (args.length >= 1) {
+        if (args[0] != null) {
             InfluencerReader reader = new InfluencerReader(args[0]);
         }
         else {
