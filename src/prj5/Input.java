@@ -8,11 +8,11 @@ public class Input {
     public static void main(String[] args)
         throws FileNotFoundException,
         ParseException {
-        if (args[0] != null) {
+        if (args.length == 1) {
             InfluencerReader reader = new InfluencerReader(args[0]);
         }
         else {
-            InfluencerReader reader = new InfluencerReader("SampleInput1_2022.csv");
+            InfluencerReader reader = new InfluencerReader("SampleInput1.csv");
         }
     }
 }

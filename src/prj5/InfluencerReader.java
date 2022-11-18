@@ -58,10 +58,12 @@ public class InfluencerReader {
         influencers = new SinglyLinkedList<Influencer>();
         // Creates scanner inside the input file
         Scanner file = new Scanner(new File(fileName));
+        // Holds the next line
+        String read = file.nextLine();
         // Loops until the file is out of new lines
         while (file.hasNextLine()) {
-            // Holds the next line
-            String read = file.nextLine();
+            // Move to the line after the headers
+            read = file.nextLine();
             // Gets the data on the current line
             Scanner currLine = new Scanner(read).useDelimiter(",");
             // Initialize the array of tokens (each individual element)
@@ -79,27 +81,16 @@ public class InfluencerReader {
             currLine.close();
             // If successfully gathered 10 tokens and the month is valid
             if (tokenCount == 10) {
-                if (tokens[0].toLowerCase() == "january" || tokens[0]
-                    .toLowerCase() == "february" || tokens[0]
-                        .toLowerCase() == "march" || tokens[0]
-                            .toLowerCase() == "april" || tokens[0]
-                                .toLowerCase() == "may" || tokens[0]
-                                    .toLowerCase() == "june" || tokens[0]
-                                        .toLowerCase() == "july" || tokens[0]
-                                            .toLowerCase() == "august"
-                    || tokens[0].toLowerCase() == "september" || tokens[0]
-                        .toLowerCase() == "october" || tokens[0]
-                            .toLowerCase() == "november" || tokens[0]
-                                .toLowerCase() == "december") {
-                    // Create a new influencer using the 10 tokens
-                    Influencer influencerToAdd = new Influencer(tokens[0],
-                        tokens[1], tokens[2], tokens[3], tokens[4], Integer
-                            .valueOf(tokens[5]), Integer.valueOf(tokens[6]),
-                        Integer.valueOf(tokens[7]), Integer.valueOf(tokens[8]),
-                        Integer.valueOf(tokens[9]));
-                    // Add that influencer to the list
-                    influencers.add(influencerToAdd);
-                }
+
+                // Create a new influencer using the 10 tokens
+                Influencer influencerToAdd = new Influencer(tokens[0],
+                    tokens[1], tokens[2], tokens[3], tokens[4], Integer.valueOf(
+                        tokens[5]), Integer.valueOf(tokens[6]), Integer.valueOf(
+                            tokens[7]), Integer.valueOf(tokens[8]), Integer
+                                .valueOf(tokens[9]));
+                // Add that influencer to the list
+                influencers.add(influencerToAdd);
+
             }
             // If there are more or less than 10 tokens throw exception
             else {
