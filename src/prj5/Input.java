@@ -12,7 +12,7 @@ public class Input {
             InfluencerReader reader = new InfluencerReader(args[0]);
         }
         else {
-            InfluencerReader reader = new InfluencerReader("SampleInput1.csv");
+            InfluencerReader reader = new InfluencerReader("SampleInput1_2022.csv");
         }
     }
 }
