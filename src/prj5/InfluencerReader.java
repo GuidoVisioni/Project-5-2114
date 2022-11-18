@@ -16,10 +16,8 @@ public class InfluencerReader {
     /**
      * Constructor
      * 
-     * @param applicantFileName
+     * @param inputFileName
      *            Applicant File
-     * @param planetFileName
-     *            Planet File
      * @throws java.text.ParseException
      *             Exception
      * @throws FileNotFoundException
@@ -36,7 +34,7 @@ public class InfluencerReader {
         InfluencerCalculator calc = new InfluencerCalculator(influencers);
         // In the colony code they also created a window here. Not sure if we
         // need to do that
-        // SpaceWindow window = new SpaceWindow(calc);
+        GUIWindow window = new GUIWindow(calc);
     }
 
 
@@ -74,6 +72,7 @@ public class InfluencerReader {
             // 10
             while (currLine.hasNext() && tokenCount < 10) {
                 // Add the token to the tokens array
+                // Should grab the tokens by whitespace by default
                 tokens[tokenCount++] = currLine.next();
             }
             // Exit the current line
