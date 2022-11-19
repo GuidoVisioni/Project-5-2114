@@ -81,7 +81,8 @@ public class InfluencerCalculator {
             }
         }
         DecimalFormat format = new DecimalFormat("#.#");
-        return Double.valueOf(format.format(tradER / marchMan.getFollowers()));
+        return Double.valueOf(format.format((tradER / marchMan.getFollowers())
+            * 100));
     }
 
 
@@ -115,7 +116,7 @@ public class InfluencerCalculator {
         String channelName = influencers.getEntry(0).getChannelName();
         builder.append(influencers.getEntry(0).getChannelName() + "\n");
         builder.append("traditional: " + getTradEngageForQuart(influencers,
-            channelName) + "\n");
+            channelName.toLowerCase()) + "\n");
         for (int i = 0; i < influencers.getLength(); i++) {
             if (!(channelName.equals(influencers.getEntry(i)
                 .getChannelName()))) {

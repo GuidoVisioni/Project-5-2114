@@ -227,7 +227,7 @@ public class Influencer {
         }
         double total = Double.valueOf(this.getTotalEngagement());
         DecimalFormat format = new DecimalFormat("#.#");
-        return Double.valueOf(format.format((total) * 100));
+        return Double.valueOf(format.format((total)));
     }
 
 

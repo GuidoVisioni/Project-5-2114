@@ -26,17 +26,16 @@ public class InfluencerReader {
      *             Exception
      */
     public InfluencerReader(String inputFileName)
-        throws java.text.ParseException,
-        FileNotFoundException {
+        throws FileNotFoundException {
         // Initialize influencer list
         influencers = readInfluencerInput(inputFileName);
         // Create an influencer calculator
         InfluencerCalculator calc = new InfluencerCalculator(influencers);
         // In the colony code they also created a window here. Not sure if we
         // need to do that
-        GUIWindow window = new GUIWindow(calc);
+        //GUIWindow window = new GUIWindow(calc);
         calc.output();
-    }
+    } 
 
 
     /**
@@ -52,8 +51,7 @@ public class InfluencerReader {
      *             Exception
      */
     private SinglyLinkedList<Influencer> readInfluencerInput(String fileName)
-        throws FileNotFoundException,
-        java.text.ParseException {
+        throws FileNotFoundException {
 
         // Creates influencer linked list to be populated
         influencers = new SinglyLinkedList<Influencer>();
@@ -98,11 +96,6 @@ public class InfluencerReader {
                         influencers.add(influencerToAdd);
                     }
                 }
-            }
-            // If there are more or less than 10 tokens throw exception
-            else {
-                throw new java.text.ParseException("parse exception",
-                    tokenCount);
             }
         }
         // Close the file
