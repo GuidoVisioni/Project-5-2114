@@ -116,6 +116,8 @@ public class InfluencerTest extends TestCase {
     public void testGetEngagementTraditional() {
         assertEquals(one.getEngagementTraditional(), 11.4, 0.001);
         assertEquals(two.getEngagementTraditional(), 252.4, 0.001);
+        System.out.println(one.getEngagementTraditional());
+        System.out.println(two.getEngagementTraditional());
     }
     
     /**
@@ -124,5 +126,7 @@ public class InfluencerTest extends TestCase {
     public void testGetEngagementReach() {
         assertEquals(one.getEngagementReach(), 79.8, 0.001);
         assertEquals(two.getEngagementReach(), 7873.0, 0.001);
+        System.out.println(one.getEngagementReach());
+        System.out.println(two.getEngagementReach());
     }
 }
