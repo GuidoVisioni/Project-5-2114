@@ -1,5 +1,6 @@
 package prj5;
 
+import java.text.DecimalFormat;
 import java.util.Comparator;
 
 /**
@@ -52,7 +53,41 @@ public class InfluencerCalculator {
         influencers.replace(index + 1, entry);
     }
     
-   
+    /**
+     * Get the traditional engagement for an influencer
+     * 
+     * @return
+     *         Traditional Engagement
+     */
+    public double getEngagementTraditional(SinglyLinkedList<Influencer> influencers, String channelName) {
+        ComparatorAlphabetical compareAlpha = new ComparatorAlphabetical();
+        sort(influencers, compareAlpha);
+        if(this.getFollowerCount() == 0)
+        {
+            return -1;
+        }
+        DecimalFormat format = new DecimalFormat("#.#");
+        return Double.valueOf(format.format((this.getTotalEngagement() / this.getFollowerCount())
+            * 100));
+    }
+
+
+    /**
+     * Get the engagement by reach for an influencer
+     * 
+     * @return
+     *         Reach Engagement
+     */
+    public double getEngagementReach(SinglyLinkedList<Influencer> influencers, String channelName) {
+        ComparatorAlphabetical compareAlpha = new ComparatorAlphabetical();
+        sort(influencers, compareAlpha);
+        if(this.getReach() == 0)
+        {
+            return -1;
+        }
+        DecimalFormat format = new DecimalFormat("#.#");
+        return Double.valueOf(format.format((this.getTotalEngagement() / this.getReach()) * 100));
+    }
 
     public void output() {
         ComparatorAlphabetical compareAlpha = new ComparatorAlphabetical();
@@ -61,24 +96,25 @@ public class InfluencerCalculator {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             if (builder.length() > 1) {
-                builder.append("==========");
+                builder.append("==========" + "\n");
             }
             builder.append(influencers.getEntry(i).getChannelName() + "\n");
-            builder.append("traditional: " + influencers.getEntry(i).getEngagementTraditional());
-            builder.append("==========");
+            builder.append("traditional: " + getEngagementTraditional(influencers) + "\n");
         }
         
+        ComparatorER compareER = new ComparatorER();
+        sort(influencers, compareER);
         StringBuilder builder2 = new StringBuilder();
-        builder2.append("**********");
-        builder2.append("**********");
+        builder2.append("**********" + "\n");
+        builder2.append("**********" + "\n");
         for (int j = 0; j < 4; j ++)
         {
             if(builder2.length() > 1)
             {
-                builder2.append("==========");
+                builder2.append("==========" + "\n");
             }
             builder2.append(influencers.getEntry(j).getChannelName() + "\n");
-            builder2.append("reach: " + influencers.getEntry(j).getEngagementReach());
+            builder2.append("reach: " + influencers.getEntry(j).getEngagementReach() + "\n");
         }
         String builderString = builder.toString();
         String builder2String = builder2.toString();

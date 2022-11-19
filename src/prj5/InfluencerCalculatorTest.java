@@ -59,4 +59,9 @@ public class InfluencerCalculatorTest extends TestCase {
         assertTrue(Arrays.equals(listArray, arrayComp));
     }
     
+    public void testOutput()
+    {
+        calc.output();
+    }
+    
 }
