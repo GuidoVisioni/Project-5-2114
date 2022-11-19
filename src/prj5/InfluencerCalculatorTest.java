@@ -42,6 +42,7 @@ public class InfluencerCalculatorTest extends TestCase {
         list.add(infl4);
         list.add(infl2);
         //list currently [infl2, infl4, infl5, infl3, infl1]
+        // [bob, croatia, swindon, zzzzzzzz,  aaaaaaaa]
         calc = new InfluencerCalculator(list);
     }
     

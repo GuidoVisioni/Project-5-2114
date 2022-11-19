@@ -45,7 +45,7 @@ public class InfluencerCalculator {
 
         while ((index >= 0) && (c.compare(entry, influencers.getEntry(
             index)) < 0)) {
-            influencers.replace(index, influencers.getEntry(index));
+            influencers.replace(index + 1, influencers.getEntry(index));
             index--;
         }
 
