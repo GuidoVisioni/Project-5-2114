@@ -91,7 +91,7 @@ public class GUIWindow {
 
 
     public void clickedQuit(Button button) {
-
+        System.exit(0);
     }
 
 
