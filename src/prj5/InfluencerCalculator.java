@@ -111,7 +111,7 @@ public class InfluencerCalculator {
         builder.append("traditional: " + getTradEngageForQuart(influencers,
             channelName) + "\n");
         for (int i = 0; i < influencers.getLength(); i++) {
-            if (channelName != influencers.getEntry(i).getChannelName()) {
+            if (!(channelName.equals(influencers.getEntry(i).getChannelName()))) {
                 builder.append("==========" + "\n");
                 channelName = influencers.getEntry(i).getChannelName();
                 builder.append(channelName + "\n");
@@ -121,23 +121,28 @@ public class InfluencerCalculator {
         }
         builder.append("==========" + "\n");
 
-        
         ComparatorER compareER = new ComparatorER();
         sort(influencers, compareER);
         StringBuilder builder2 = new StringBuilder();
         SinglyLinkedList<String> foundNames = new SinglyLinkedList<String>();
         builder2.append("**********" + "\n");
         builder2.append("**********" + "\n");
-        builder2.append(influencers.getEntry(0).getChannelName() + "\n");
+        String channelName2 = influencers.getEntry(0).getChannelName();
+        builder2.append(channelName2 + "\n");
         builder2.append("reach: " + getEngageReachForQuart(influencers,
             channelName) + "\n");
-        for (int i = 0; i < influencers.getLength(); i++) {
-            if (channelName != influencers.getEntry(i).getChannelName()) {
-                builder2.append("==========" + "\n");
-                channelName = influencers.getEntry(i).getChannelName();
-                builder2.append(channelName + "\n");
-                builder2.append("traditional: " + getTradEngageForQuart(
-                    influencers, channelName) + "\n");
+        for (int j = 0; j < influencers.getLength(); j++) {
+            if (channelName2 != influencers.getEntry(j).getChannelName()) {
+                for (int k = 0; k < foundNames.getLength(); k++) {
+                    if (!(channelName2.equals(foundNames.getEntry(k)))) {
+                        foundNames.add(channelName2);
+                        builder2.append("==========" + "\n");
+                        channelName = influencers.getEntry(k).getChannelName();
+                        builder2.append(channelName2 + "\n");
+                        builder2.append("traditional: " + getEngageReachForQuart(
+                            influencers, channelName2) + "\n");
+                    }
+                }
             }
         }
         builder2.append("==========" + "\n");

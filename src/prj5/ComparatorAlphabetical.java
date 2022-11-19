@@ -14,7 +14,7 @@ public class ComparatorAlphabetical implements Comparator<Influencer> {
 
     @Override
     public int compare(Influencer one, Influencer two) {
-        return one.getChannelName().compareTo(two.getChannelName());
+        return one.getChannelName().toLowerCase().compareTo(two.getChannelName().toLowerCase());
     }
 
 }
