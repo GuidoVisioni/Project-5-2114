@@ -59,23 +59,29 @@ public class InfluencerCalculator {
         SinglyLinkedList<Influencer> influencers,
         String channelName) {
         double tradER = 0;
+        Influencer marchMan = influencers.getEntry(0);
         String firstQuarter[] = { "january", "february", "march" };
         for (int i = 0; i < influencers.getLength(); i++) {
-            if (influencers.getEntry(i).getChannelName().equals(channelName)) {
+            if (influencers.getEntry(i).getChannelName().toLowerCase().equals(
+                channelName)) {
                 for (int j = 0; j < firstQuarter.length; j++) {
+                    if (influencers.getEntry(i).getMonth().toLowerCase().equals(
+                        firstQuarter[2])) {
+                        marchMan = influencers.getEntry(j);
+                    }
                     if (influencers.getEntry(i).getMonth().toLowerCase().equals(
                         firstQuarter[j])) {
                         tradER += influencers.getEntry(i)
-                            .getEngagementTraditional();
+                            .getEngagementTraditionalNoDiv();
                     }
                     else {
                         tradER += 0;
                     }
                 }
             }
-
         }
-        return tradER / 3;
+        DecimalFormat format = new DecimalFormat("#.#");
+        return Double.valueOf(format.format(tradER / marchMan.getFollowers()));
     }
 
 
@@ -111,12 +117,13 @@ public class InfluencerCalculator {
         builder.append("traditional: " + getTradEngageForQuart(influencers,
             channelName) + "\n");
         for (int i = 0; i < influencers.getLength(); i++) {
-            if (!(channelName.equals(influencers.getEntry(i).getChannelName()))) {
+            if (!(channelName.equals(influencers.getEntry(i)
+                .getChannelName()))) {
                 builder.append("==========" + "\n");
                 channelName = influencers.getEntry(i).getChannelName();
                 builder.append(channelName + "\n");
                 builder.append("traditional: " + getTradEngageForQuart(
-                    influencers, channelName) + "\n");
+                    influencers, channelName.toLowerCase()) + "\n");
             }
         }
         builder.append("==========" + "\n");
@@ -139,8 +146,9 @@ public class InfluencerCalculator {
                         builder2.append("==========" + "\n");
                         channelName = influencers.getEntry(k).getChannelName();
                         builder2.append(channelName2 + "\n");
-                        builder2.append("traditional: " + getEngageReachForQuart(
-                            influencers, channelName2) + "\n");
+                        builder2.append("traditional: "
+                            + getEngageReachForQuart(influencers, channelName2)
+                            + "\n");
                     }
                 }
             }

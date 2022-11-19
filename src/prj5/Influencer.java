@@ -181,6 +181,14 @@ public class Influencer {
     }
 
 
+    /**
+     * Set views
+     */
+    public void setViews(int view) {
+        views = view;
+    }
+
+
     private int getTotalEngagement() {
         return this.getLikes() + this.getComments();
     }
@@ -203,14 +211,23 @@ public class Influencer {
      *         Traditional Engagement
      */
     public double getEngagementTraditional() {
-        if(this.getFollowerCount() == 0)
-        {
+        if (this.getFollowerCount() == 0) {
             return -1;
         }
         double total = Double.valueOf(this.getTotalEngagement());
         double follower = Double.valueOf(this.getFollowerCount());
         DecimalFormat format = new DecimalFormat("#.#");
         return Double.valueOf(format.format((total / follower) * 100));
+    }
+
+
+    public double getEngagementTraditionalNoDiv() {
+        if (this.getFollowerCount() == 0) {
+            return -1;
+        }
+        double total = Double.valueOf(this.getTotalEngagement());
+        DecimalFormat format = new DecimalFormat("#.#");
+        return Double.valueOf(format.format((total) * 100));
     }
 
 
@@ -221,8 +238,7 @@ public class Influencer {
      *         Reach Engagement
      */
     public double getEngagementReach() {
-        if(this.getReach() == 0)
-        {
+        if (this.getReach() == 0) {
             return -1;
         }
         double total = Double.valueOf(this.getTotalEngagement());
