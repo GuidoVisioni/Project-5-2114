@@ -53,41 +53,6 @@ public class InfluencerCalculator {
         influencers.replace(index + 1, entry);
     }
     
-    /**
-     * Get the traditional engagement for an influencer
-     * 
-     * @return
-     *         Traditional Engagement
-     */
-    public double getEngagementTraditional(SinglyLinkedList<Influencer> influencers, String channelName) {
-        ComparatorAlphabetical compareAlpha = new ComparatorAlphabetical();
-        sort(influencers, compareAlpha);
-        if(this.getFollowerCount() == 0)
-        {
-            return -1;
-        }
-        DecimalFormat format = new DecimalFormat("#.#");
-        return Double.valueOf(format.format((this.getTotalEngagement() / this.getFollowerCount())
-            * 100));
-    }
-
-
-    /**
-     * Get the engagement by reach for an influencer
-     * 
-     * @return
-     *         Reach Engagement
-     */
-    public double getEngagementReach(SinglyLinkedList<Influencer> influencers, String channelName) {
-        ComparatorAlphabetical compareAlpha = new ComparatorAlphabetical();
-        sort(influencers, compareAlpha);
-        if(this.getReach() == 0)
-        {
-            return -1;
-        }
-        DecimalFormat format = new DecimalFormat("#.#");
-        return Double.valueOf(format.format((this.getTotalEngagement() / this.getReach()) * 100));
-    }
 
     public void output() {
         ComparatorAlphabetical compareAlpha = new ComparatorAlphabetical();
