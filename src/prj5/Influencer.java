@@ -1,5 +1,7 @@
 package prj5;
 
+import java.text.DecimalFormat;
+
 /**
  * Influencer Object Class
  * 
@@ -205,8 +207,9 @@ public class Influencer {
         {
             return -1;
         }
-        return (this.getTotalEngagement() / this.getFollowerCount())
-            * 100;
+        DecimalFormat format = new DecimalFormat("#.#");
+        return Double.valueOf(format.format((this.getTotalEngagement() / this.getFollowerCount())
+            * 100));
     }
 
 
@@ -221,7 +224,8 @@ public class Influencer {
         {
             return -1;
         }
-        return (this.getTotalEngagement() / this.getReach()) * 100;
+        DecimalFormat format = new DecimalFormat("#.#");
+        return Double.valueOf(format.format((this.getTotalEngagement() / this.getReach()) * 100));
     }
 
 }

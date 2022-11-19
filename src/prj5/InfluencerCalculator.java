@@ -54,12 +54,12 @@ public class InfluencerCalculator {
     
    
 
-    public String output() {
+    public void output() {
         ComparatorAlphabetical compareAlpha = new ComparatorAlphabetical();
         sort(influencers, compareAlpha);
         
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < influencers.getLength(); i++) {
+        for (int i = 0; i < 4; i++) {
             if (builder.length() > 1) {
                 builder.append("==========");
             }
@@ -71,7 +71,7 @@ public class InfluencerCalculator {
         StringBuilder builder2 = new StringBuilder();
         builder2.append("**********");
         builder2.append("**********");
-        for (int j = 0; j < influencers.getLength(); j ++)
+        for (int j = 0; j < 4; j ++)
         {
             if(builder2.length() > 1)
             {
@@ -82,6 +82,6 @@ public class InfluencerCalculator {
         }
         String builderString = builder.toString();
         String builder2String = builder2.toString();
-        return builderString + builder2String;
+        System.out.print(builderString + builder2String);
     }
 }
