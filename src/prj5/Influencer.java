@@ -17,7 +17,7 @@ public class Influencer {
     private String country;
     private String mainTopic;
     private int likes;
-    private int posts;
+    private double posts;
     private int followers;
     private int comments;
     private int views;
@@ -53,7 +53,7 @@ public class Influencer {
         String country,
         String mainTopic,
         int likes,
-        int posts,
+        double posts,
         int followers,
         int comments,
         int views) {
@@ -69,7 +69,6 @@ public class Influencer {
         this.comments = comments;
         this.views = views;
     }
-
 
     /**
      * Gets month
@@ -143,7 +142,7 @@ public class Influencer {
      * @return
      *         posts
      */
-    public int getPosts() {
+    public double getPosts() {
         return posts;
     }
 
@@ -189,7 +188,7 @@ public class Influencer {
     }
 
 
-    private int getTotalEngagement() {
+    public int getTotalEngagement() {
         return this.getLikes() + this.getComments();
     }
 

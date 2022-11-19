@@ -89,22 +89,29 @@ public class InfluencerCalculator {
     public double getEngageReachForQuart(
         SinglyLinkedList<Influencer> influencers,
         String channelName) {
-        double reachER = 0;
+        double totalEngage = 0;
+        double totalViews = 0;
+
         String firstQuarter[] = { "january", "february", "march" };
         for (int i = 0; i < influencers.getLength(); i++) {
-            if (influencers.getEntry(i).getChannelName().equals(channelName)) {
+            if (influencers.getEntry(i).getChannelName().toLowerCase().equals(
+                channelName)) {
                 for (int j = 0; j < firstQuarter.length; j++) {
                     if (influencers.getEntry(i).getMonth().toLowerCase().equals(
                         firstQuarter[j])) {
-                        reachER += influencers.getEntry(i).getEngagementReach();
+                        totalEngage += influencers.getEntry(i)
+                            .getTotalEngagement();
+                        totalViews += influencers.getEntry(i).getViews();
                     }
                     else {
-                        reachER += 0;
+                        totalEngage += 0;
+                        totalViews += 0;
                     }
                 }
             }
         }
-        return reachER / 3;
+        DecimalFormat format = new DecimalFormat("#.#");
+        return Double.valueOf(format.format((totalEngage / totalViews) * 100));
     }
 
 
@@ -129,30 +136,41 @@ public class InfluencerCalculator {
         }
         builder.append("==========" + "\n");
 
-        ComparatorER compareER = new ComparatorER();
-        sort(influencers, compareER);
-        StringBuilder builder2 = new StringBuilder();
         SinglyLinkedList<String> foundNames = new SinglyLinkedList<String>();
-        builder2.append("**********" + "\n");
-        builder2.append("**********" + "\n");
         String channelName2 = influencers.getEntry(0).getChannelName();
-        builder2.append(channelName2 + "\n");
-        builder2.append("reach: " + getEngageReachForQuart(influencers,
-            channelName) + "\n");
         for (int j = 0; j < influencers.getLength(); j++) {
-            if (channelName2 != influencers.getEntry(j).getChannelName()) {
+            if (!(channelName2.equals(influencers.getEntry(j)
+                .getChannelName()))) {
+                channelName2 = influencers.getEntry(j).getChannelName();
                 for (int k = 0; k < foundNames.getLength(); k++) {
                     if (!(channelName2.equals(foundNames.getEntry(k)))) {
                         foundNames.add(channelName2);
-                        builder2.append("==========" + "\n");
-                        channelName = influencers.getEntry(k).getChannelName();
-                        builder2.append(channelName2 + "\n");
-                        builder2.append("traditional: "
-                            + getEngageReachForQuart(influencers, channelName2)
-                            + "\n");
                     }
                 }
             }
+        }
+
+        SinglyLinkedList<Influencer> influencerDisplay =
+            new SinglyLinkedList<Influencer>();
+        for (int l = 0; l < foundNames.getLength(); l++) {
+            channelName2 = foundNames.getEntry(l);
+            Influencer newInfluencer = new Influencer("1", "2", "3", "4", "5",
+                0, getEngageReachForQuart(influencers, channelName2.toLowerCase()), 0, 0, 1);
+            influencerDisplay.add(newInfluencer);
+        }
+
+        ComparatorER compareER = new ComparatorER();
+        sort(influencerDisplay, compareER);
+        StringBuilder builder2 = new StringBuilder();
+
+        builder2.append("**********" + "\n");
+        builder2.append("**********" + "\n");
+        for (int m = 0; m < influencerDisplay.getLength(); m++) {
+            builder2.append("==========" + "\n");
+            builder2.append(influencerDisplay.getEntry(m).getChannelName()
+                + "\n");
+            builder2.append("reach: " + influencerDisplay.getEntry(m).getPosts()
+                + "\n");
         }
         builder2.append("==========" + "\n");
         String builderString = builder.toString();
