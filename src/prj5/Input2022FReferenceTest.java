@@ -192,11 +192,7 @@ public class Input2022FReferenceTest extends student.TestCase {
                     fail("expected " + expected + " but got " + testResult
                         + " in reach reporting");
                 }
-
             }
-
         }
-
     }
-
 }
