@@ -203,13 +203,12 @@ public class Influencer {
      *         Traditional Engagement
      */
     public double getEngagementTraditional() {
-        if(this.getFollowerCount() == 0)
-        {
+        if (this.getFollowerCount() == 0) {
             return -1;
         }
         DecimalFormat format = new DecimalFormat("#.#");
-        return Double.valueOf(format.format((this.getTotalEngagement() / this.getFollowerCount())
-            * 100));
+        return Double.valueOf(format.format((this.getTotalEngagement() / this
+            .getFollowerCount()) * 100));
     }
 
 
@@ -220,12 +219,12 @@ public class Influencer {
      *         Reach Engagement
      */
     public double getEngagementReach() {
-        if(this.getReach() == 0)
-        {
+        if (this.getReach() == 0) {
             return -1;
         }
         DecimalFormat format = new DecimalFormat("#.#");
-        return Double.valueOf(format.format((this.getTotalEngagement() / this.getReach()) * 100));
+        return Double.valueOf(format.format((this.getTotalEngagement() / this
+            .getReach()) * 100));
     }
 
 }

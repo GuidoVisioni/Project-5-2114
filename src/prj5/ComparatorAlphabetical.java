@@ -7,10 +7,10 @@ import java.util.Comparator;
 
 /**
  * @author ramamittal
+ * @version 11/18/2022
  *
  */
-public class ComparatorAlphabetical implements Comparator<Influencer>{
-
+public class ComparatorAlphabetical implements Comparator<Influencer> {
 
     @Override
     public int compare(Influencer one, Influencer two) {
