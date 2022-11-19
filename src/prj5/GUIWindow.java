@@ -77,7 +77,7 @@ public class GUIWindow {
     }
 
     // If traditional engagement rate or reach engagement rate from the
-    // influencer class return 0 then depict N/A for those values on the GUI
+    // influencer class return -1 then depict N/A for those values on the GUI
 
 
     public void clickedSortName(Button button) {

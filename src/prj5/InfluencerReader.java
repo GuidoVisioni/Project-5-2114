@@ -56,6 +56,10 @@ public class InfluencerReader {
 
         // Creates influencer linked list to be populated
         influencers = new SinglyLinkedList<Influencer>();
+        // Contains valid months
+        String validMonths[] = { "january", "february", "march", "april", "may",
+            "june", "july", "august", "september", "october", "november",
+            "december" };
         // Creates scanner inside the input file
         Scanner file = new Scanner(new File(fileName));
         // Holds the next line
@@ -81,16 +85,18 @@ public class InfluencerReader {
             currLine.close();
             // If successfully gathered 10 tokens and the month is valid
             if (tokenCount == 10) {
-
-                // Create a new influencer using the 10 tokens
-                Influencer influencerToAdd = new Influencer(tokens[0],
-                    tokens[1], tokens[2], tokens[3], tokens[4], Integer.valueOf(
-                        tokens[5]), Integer.valueOf(tokens[6]), Integer.valueOf(
-                            tokens[7]), Integer.valueOf(tokens[8]), Integer
-                                .valueOf(tokens[9]));
-                // Add that influencer to the list
-                influencers.add(influencerToAdd);
-
+                for (int i = 0; i < validMonths.length; i++) {
+                    if (tokens[0].toLowerCase().equals(validMonths[i])) {
+                        // Create a new influencer using the 10 tokens
+                        Influencer influencerToAdd = new Influencer(tokens[0],
+                            tokens[1], tokens[2], tokens[3], tokens[4], Integer
+                                .valueOf(tokens[5]), Integer.valueOf(tokens[6]),
+                            Integer.valueOf(tokens[7]), Integer.valueOf(
+                                tokens[8]), Integer.valueOf(tokens[9]));
+                        // Add that influencer to the list
+                        influencers.add(influencerToAdd);
+                    }
+                }
             }
             // If there are more or less than 10 tokens throw exception
             else {
