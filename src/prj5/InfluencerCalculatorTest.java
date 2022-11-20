@@ -14,6 +14,7 @@ public class InfluencerCalculatorTest extends TestCase {
     private InfluencerCalculator calc;
     private SinglyLinkedList<Influencer> list;
     private ComparatorAlphabetical compareA;
+    private ComparatorER compareER;
     private Influencer infl1;
     private Influencer infl2;
     private Influencer infl3;
@@ -28,6 +29,7 @@ public class InfluencerCalculatorTest extends TestCase {
      */
     public void setUp() {
         compareA = new ComparatorAlphabetical();
+        compareER = new ComparatorER();
         infl1 = new Influencer("january", "bob", "ArtAllDay", "US", "food",
             1776, 88, 10000, 150, 70);
         infl2 = new Influencer("january", "bob", "ArtAllDay", "US", "food", 164,
@@ -67,9 +69,19 @@ public class InfluencerCalculatorTest extends TestCase {
 
         calc.sort(list, compareA);
         Object[] listArray = list.toArray();
-        Object[] arrayComp = new Object[] { infl1, infl2, infl3, infl4, infl5,
-            infl6, infl7, infl8 };
+        Object[] arrayComp = new Object[] { infl2, infl1, infl4, infl3, infl6,
+            infl5, infl7, infl8 };
         assertTrue(Arrays.equals(listArray, arrayComp));
     }
 
+    /**
+     * tests the sort method for the engagement rate 
+     */
+    public void testSortEngagementRate() {
+        calc.sort(list, compareER);
+        Object[] listArray = list.toArray();
+        Object[] arrayComp = new Object[] {infl5, infl7, infl8, infl2, infl3,
+           infl1, infl6, infl4};
+        assertTrue(Arrays.equals(listArray, arrayComp));
+    }
 }
