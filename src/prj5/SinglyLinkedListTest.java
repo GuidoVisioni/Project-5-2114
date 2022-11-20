@@ -26,6 +26,9 @@ public class SinglyLinkedListTest extends TestCase {
      */
     public void testAdd() {
         assertTrue(list.isEmpty());
+        list.add(0, "meow");
+        list.clear();
+        assertTrue(list.isEmpty());
         list.add("meow");
         assertEquals(list.getLength(), 1);
         assertFalse(list.isEmpty());

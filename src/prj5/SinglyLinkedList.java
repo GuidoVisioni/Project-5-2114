@@ -163,7 +163,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
         Node curr = firstNode;
         int currIndex = 0;
-        while ((currIndex != index) && (curr != null)) {
+        while (currIndex != index) {
             currIndex++;
             curr = curr.getNext();
         }
@@ -210,7 +210,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
         Node curr = firstNode;
         Node prev = null;
         int currIndex = 0;
-        while ((currIndex != index) && (curr != null)) {
+        while (currIndex != index) {
             currIndex++;
             prev = curr;
             curr = curr.getNext();
@@ -250,7 +250,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
         Node curr = firstNode;
         int currIndex = 0;
-        while ((curr != null) && (currIndex != index)) {
+        while (currIndex != index) {
             curr = curr.getNext();
             currIndex++;
         }
@@ -346,22 +346,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
         public Node(E entry) {
             data = entry;
         }
-
-
-        /**
-         * creates a new node object with both data and a next node
-         * 
-         * @param entry
-         *            the data that the node is holding
-         * @param nextNode
-         *            the next node
-         */
-        public Node(E entry, Node nextNode) {
-            this(entry);
-            this.setNext(nextNode);
-        }
-
-
+        
         /**
          * sets the next node
          * 

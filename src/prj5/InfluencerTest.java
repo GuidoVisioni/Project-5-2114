@@ -80,8 +80,8 @@ public class InfluencerTest extends TestCase {
      * tests get posts
      */
     public void testGetPosts() {
-        assertEquals(one.getPosts(), 20);
-        assertEquals(two.getPosts(), 184);
+        assertEquals(one.getPosts(), 20.0, 0.0001);
+        assertEquals(two.getPosts(), 184.0, 0.0001);
 
     }
     
