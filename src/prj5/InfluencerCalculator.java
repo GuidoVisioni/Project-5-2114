@@ -67,7 +67,7 @@ public class InfluencerCalculator {
                 for (int j = 0; j < firstQuarter.length; j++) {
                     if (influencers.getEntry(i).getMonth().toLowerCase().equals(
                         firstQuarter[2])) {
-                        marchMan = influencers.getEntry(j);
+                        marchMan = influencers.getEntry(i);
                     }
                     if (influencers.getEntry(i).getMonth().toLowerCase().equals(
                         firstQuarter[j])) {
