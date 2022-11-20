@@ -9,6 +9,8 @@ import list.ListInterface;
  * 
  * @author hsabbott
  * @version 2022.11.13
+ * @param <E>
+ *     the datatype the list is holding
  */
 public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
@@ -40,7 +42,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
      * 
      * @param newEntry
      *            the entry being added
-     * @throws IllegalArugmentException
+     * @throws IllegalArgumentException
      *             when newEntry is null
      */
     @Override

@@ -182,12 +182,18 @@ public class Influencer {
 
     /**
      * Set views
+     * @param view
+     *     the number of views
      */
     public void setViews(int view) {
         views = view;
     }
 
-
+    /**
+     * gets the total engagement
+     * @return
+     *     the total engagement
+     */
     public int getTotalEngagement() {
         return this.getLikes() + this.getComments();
     }
@@ -219,7 +225,11 @@ public class Influencer {
         return Double.valueOf(format.format((total / follower) * 100));
     }
 
-
+    /**
+     * gets the traditional engagement without dividing
+     * @return
+     *     the traditional engeagement without dividing
+     */
     public double getEngagementTraditionalNoDiv() {
         if (this.getFollowerCount() == 0) {
             return -1;

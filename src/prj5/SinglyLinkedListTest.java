@@ -1,7 +1,6 @@
 package prj5;
 
 import java.util.Arrays;
-import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import student.TestCase;
