@@ -137,16 +137,13 @@ public class InfluencerCalculator {
         builder.append("==========" + "\n");
 
         SinglyLinkedList<String> foundNames = new SinglyLinkedList<String>();
+        foundNames.add(influencers.getEntry(0).getChannelName());
         String channelName2 = influencers.getEntry(0).getChannelName();
         for (int j = 0; j < influencers.getLength(); j++) {
             if (!(channelName2.equals(influencers.getEntry(j)
                 .getChannelName()))) {
                 channelName2 = influencers.getEntry(j).getChannelName();
-                for (int k = 0; k < foundNames.getLength(); k++) {
-                    if (!(channelName2.equals(foundNames.getEntry(k)))) {
-                        foundNames.add(channelName2);
-                    }
-                }
+                foundNames.add(channelName2);
             }
         }
 
@@ -154,27 +151,26 @@ public class InfluencerCalculator {
             new SinglyLinkedList<Influencer>();
         for (int l = 0; l < foundNames.getLength(); l++) {
             channelName2 = foundNames.getEntry(l);
-            Influencer newInfluencer = new Influencer("1", "2", "3", "4", "5",
-                0, getEngageReachForQuart(influencers, channelName2.toLowerCase()), 0, 0, 1);
+            Influencer newInfluencer = new Influencer("1", "2", foundNames
+                .getEntry(l), "4", "5", 0, getEngageReachForQuart(influencers,
+                    channelName2.toLowerCase()), 0, 0, 1);
             influencerDisplay.add(newInfluencer);
         }
 
         ComparatorER compareER = new ComparatorER();
         sort(influencerDisplay, compareER);
-        StringBuilder builder2 = new StringBuilder();
-
-        builder2.append("**********" + "\n");
-        builder2.append("**********" + "\n");
+        builder.append("**********" + "\n" + "**********" + "\n");
         for (int m = 0; m < influencerDisplay.getLength(); m++) {
-            builder2.append("==========" + "\n");
-            builder2.append(influencerDisplay.getEntry(m).getChannelName()
+            if (m > 0)
+            {
+            builder.append("==========" + "\n");
+            }
+            builder.append(influencerDisplay.getEntry(m).getChannelName()
                 + "\n");
-            builder2.append("reach: " + influencerDisplay.getEntry(m).getPosts()
+            builder.append("reach: " + influencerDisplay.getEntry(m).getPosts()
                 + "\n");
         }
-        builder2.append("==========" + "\n");
-        String builderString = builder.toString();
-        String builder2String = builder2.toString();
-        System.out.print(builderString + builder2String);
+        builder.append("==========");
+        System.out.print(builder.toString());
     }
 }
