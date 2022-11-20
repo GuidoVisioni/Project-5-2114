@@ -16,11 +16,11 @@ public class ComparatorER implements Comparator<Influencer> {
 
     @Override
     public int compare(Influencer one, Influencer two) {
-        if (one.getEngagementReach() > two.getEngagementReach()) {
+        if (one.getPosts() < two.getPosts()) {
             return 1;
         }
 
-        else if (one.getEngagementReach() < two.getEngagementReach()) {
+        else if (one.getPosts() > two.getPosts()) {
             return -1;
         }
 
