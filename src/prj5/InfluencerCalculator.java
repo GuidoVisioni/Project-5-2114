@@ -107,12 +107,12 @@ public class InfluencerCalculator {
 
 
     /**
-     * Engage Reach Quarter
+     * Gets the quarterly reach engagement rate (Jan, Feb, March)
      * 
      * @param channelName
      *            channelName
      * @return
-     *         double
+     *          Quarterly reach engagement rate formatted "#.#"
      */
     public double getEngageReachForQuart(String channelName) {
         double totalEngage = 0;
