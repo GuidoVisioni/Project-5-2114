@@ -26,53 +26,54 @@ public class InfluencerCalculator {
         }
         this.influencers = influencerList;
     }
-    
+
+
     /**
+     * Gets influencer list
      * 
-     * @return list of influencers
+     * @return
+     *         list of influencers
      */
     public SinglyLinkedList<Influencer> getInfluencers() {
         return influencers;
     }
 
-    private void insertInOrder(
-        Influencer entry,
-        SinglyLinkedList<Influencer> influencer,
-        int end,
-        Comparator<Influencer> c) {
-        int index = end;
 
-        while ((index >= 0) && (c.compare(entry, influencer.getEntry(
-            index)) < 0)) {
-            influencer.replace(index + 1, influencer.getEntry(index));
-            index--;
-        }
-
-        influencer.replace(index + 1, entry);
-    }
     /**
+     * Sorts the linked list
      * 
-     * @param influencer
-     *            influencer
      * @param c
      *            comparator
      */
     public void sort(Comparator<Influencer> c) {
         for (int i = 0; i < influencers.getLength(); i++) {
 
-            insertInOrder(influencers.getEntry(i), influencers, i - 1, c);
+            insertInOrderSortHelper(influencers.getEntry(i), influencers, i - 1,
+                c);
         }
-
     }
 
 
+    private void insertInOrderSortHelper(
+        Influencer entry,
+        SinglyLinkedList<Influencer> influencer,
+        int end,
+        Comparator<Influencer> c) {
+
+        while ((end >= 0) && (c.compare(entry, influencer.getEntry(end)) < 0)) {
+            influencer.replace(end + 1, influencer.getEntry(end));
+            end--;
+        }
+        influencer.replace(end + 1, entry);
+    }
+
     /**
-     * Traditional Engagement
+     * Gets the quarterly traditional engagement rate (Jan, Feb, March)
      * 
      * @param channelName
      *            channelName
      * @return
-     *         double
+     *         Quarterly traditional engagement rate formatted "#.#"
      */
     public double getTradEngageForQuart(String channelName) {
         double tradER = 0;
@@ -88,8 +89,7 @@ public class InfluencerCalculator {
                     }
                     if (influencers.getEntry(i).getMonth().toLowerCase().equals(
                         firstQuarter[j])) {
-                        tradER += influencers.getEntry(i)
-                            .getTotalEngagement();
+                        tradER += influencers.getEntry(i).getTotalEngagement();
                     }
                     else {
                         tradER += 0;
