@@ -5,12 +5,12 @@ import java.util.NoSuchElementException;
 import list.ListInterface;
 
 /**
- * A singly linked list of nodes
+ * A singly linked list implementation
  * 
  * @author rama04, hsabbott, gjvisioni25
  * @version 11/13/2022
  * @param <E>
- *     the datatype the list is holding
+ *            the type the list is holding
  */
 public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
@@ -346,7 +346,8 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
         public Node(E entry) {
             data = entry;
         }
-        
+
+
         /**
          * sets the next node
          * 

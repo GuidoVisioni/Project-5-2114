@@ -83,7 +83,7 @@ public class InfluencerCalculator {
                     if (influencers.getEntry(i).getMonth().toLowerCase().equals(
                         firstQuarter[j])) {
                         tradER += influencers.getEntry(i)
-                            .getEngagementTraditionalNoDiv();
+                            .getTotalEngagement();
                     }
                     else {
                         tradER += 0;

@@ -188,12 +188,14 @@ public class Influencer {
      *         likes + comments
      */
     public int getTotalEngagement() {
-        return this.getLikes() + this.getComments();
+        return likes + comments;
     }
 
 
     /**
-     * Get the traditional engagement for an influencer for the month
+     * Get the rounded traditional engagement rate for an influencer for the
+     * month. If the
+     * followers for the month are zero return -1
      * 
      * @return
      *         Traditional Engagement Rate
@@ -208,21 +210,6 @@ public class Influencer {
         return Double.valueOf(format.format((total / follower) * 100));
     }
 
-    /**
-     * gets the traditional engagement without dividing
-     * 
-     * @return
-     *         the traditional engagement without dividing
-     */
-    public double getEngagementTraditionalNoDiv() {
-        if (this.getFollowers() == 0) {
-            return -1;
-        }
-        double total = Double.valueOf(this.getTotalEngagement());
-        DecimalFormat format = new DecimalFormat("#.#");
-        return Double.valueOf(format.format((total)));
-    }
-
 
     /**
      * Get the engagement by reach for an influencer
@@ -235,7 +222,7 @@ public class Influencer {
             return -1;
         }
         double total = Double.valueOf(this.getTotalEngagement());
-        double reach = Double.valueOf(this.getViews());
+        double reach = Double.valueOf(views);
         DecimalFormat format = new DecimalFormat("#.#");
         return Double.valueOf(format.format((total / reach) * 100));
     }
