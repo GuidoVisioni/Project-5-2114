@@ -81,7 +81,7 @@ public class GUIWindow {
         timeFrame = new TextShape(1, 1, "January");
         window.addShape(timeFrame);
 
-        engagementType = new TextShape(1, 21, " Traditional Engagement Rate");
+        engagementType = new TextShape(1, 21, "Traditional Engagement Rate");
         window.addShape(engagementType);
         
         sortingLabel = new TextShape(1, 41, "Sorting by Engagement Rate");
