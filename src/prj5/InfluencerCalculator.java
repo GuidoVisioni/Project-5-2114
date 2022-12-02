@@ -13,9 +13,9 @@ import java.util.Comparator;
 public class InfluencerCalculator {
 
     private SinglyLinkedList<Influencer> influencers;
-    private SinglyLinkedList<Influencer> janInfluencers; 
-    private SinglyLinkedList<Influencer> febInfluencers; 
-    private SinglyLinkedList<Influencer> marInfluencers; 
+    private SinglyLinkedList<Influencer> janInfluencers;
+    private SinglyLinkedList<Influencer> febInfluencers;
+    private SinglyLinkedList<Influencer> marInfluencers;
 
     /**
      * Constructor
@@ -44,6 +44,7 @@ public class InfluencerCalculator {
         return influencers;
     }
 
+
     /**
      * Gets influencer list for january
      * 
@@ -53,7 +54,8 @@ public class InfluencerCalculator {
     public SinglyLinkedList<Influencer> getJanInfluencers() {
         return janInfluencers;
     }
-    
+
+
     /**
      * Gets influencer list for february
      * 
@@ -63,7 +65,8 @@ public class InfluencerCalculator {
     public SinglyLinkedList<Influencer> getFebInfluencers() {
         return febInfluencers;
     }
-    
+
+
     /**
      * Gets influencer list for march
      * 
@@ -74,6 +77,7 @@ public class InfluencerCalculator {
         return marInfluencers;
     }
 
+
     /**
      * Sorts the linked list
      * 
@@ -81,10 +85,21 @@ public class InfluencerCalculator {
      *            comparator
      */
     public void sort(Comparator<Influencer> c) {
-        for (int i = 0; i < influencers.getLength(); i++) {
+        for (int i = 0; i < janInfluencers.getLength(); i++) {
 
-            insertInOrderSortHelper(influencers.getEntry(i), influencers, i - 1,
-                c);
+            insertInOrderSortHelper(janInfluencers.getEntry(i), janInfluencers,
+                i - 1, c);
+        }
+        for (int j = 0; j < febInfluencers.getLength(); j++) {
+
+            insertInOrderSortHelper(febInfluencers.getEntry(j), febInfluencers,
+                j - 1, c);
+
+        }
+        for (int k = 0; k < marInfluencers.getLength(); k++) {
+
+            insertInOrderSortHelper(marInfluencers.getEntry(k), marInfluencers,
+                k - 1, c);
         }
     }
 
@@ -101,6 +116,7 @@ public class InfluencerCalculator {
         }
         influencer.replace(end + 1, entry);
     }
+
 
     /**
      * Gets the quarterly traditional engagement rate (Jan, Feb, March)
@@ -139,10 +155,10 @@ public class InfluencerCalculator {
         return Double.valueOf(format.format((tradER / marchMan.getFollowers())
             * 100));
     }
-    
-    
+
+
     private SinglyLinkedList<Influencer> createMonthList(String timePeriod) {
-        SinglyLinkedList<Influencer> monthList = 
+        SinglyLinkedList<Influencer> monthList =
             new SinglyLinkedList<Influencer>();
         String time = timePeriod.toLowerCase();
         for (int i = 0; i < influencers.getLength(); i++) {
@@ -161,7 +177,7 @@ public class InfluencerCalculator {
      * @param channelName
      *            channelName
      * @return
-     *          Quarterly reach engagement rate formatted "#.#"
+     *         Quarterly reach engagement rate formatted "#.#"
      */
     public double getEngageReachForQuart(String channelName) {
         double totalEngage = 0;
