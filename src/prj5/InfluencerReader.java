@@ -34,7 +34,6 @@ public class InfluencerReader {
         // In the colony code they also created a window here. Not sure if we
         // need to do that
         GUIWindow window = new GUIWindow(calc);
-        calc.output();
     } 
 
 
