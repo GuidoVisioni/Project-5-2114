@@ -26,6 +26,14 @@ public class InfluencerCalculator {
         }
         this.influencers = influencerList;
     }
+    
+    /**
+     * 
+     * @return list of influencers
+     */
+    public SinglyLinkedList<Influencer> getInfluencers() {
+        return influencers;
+    }
 
     private void insertInOrder(
         Influencer entry,
@@ -49,12 +57,10 @@ public class InfluencerCalculator {
      * @param c
      *            comparator
      */
-    public void sort(
-        SinglyLinkedList<Influencer> influencer,
-        Comparator<Influencer> c) {
-        for (int i = 0; i < influencer.getLength(); i++) {
+    public void sort(Comparator<Influencer> c) {
+        for (int i = 0; i < influencers.getLength(); i++) {
 
-            insertInOrder(influencer.getEntry(i), influencer, i - 1, c);
+            insertInOrder(influencers.getEntry(i), influencers, i - 1, c);
         }
 
     }

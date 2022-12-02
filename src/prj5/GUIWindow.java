@@ -25,7 +25,11 @@ public class GUIWindow {
     private AList<Shape> influencerBars;
     private AList<TextShape> barLabels;
     private InfluencerCalculator data;
-
+    private Shape rect1;
+    private Shape rect2;
+    private Shape rect3;
+    private Shape rect4;
+    
     /**
      * creates a new GUIWindow object
      * 
@@ -93,11 +97,17 @@ public class GUIWindow {
 
     public void clickedSortName(Button button) {
         sortingLabel.setText("Sorting by Channel Name");
+        button.disable();
+        ComparatorAlphabetical c = new ComparatorAlphabetical();
+        data.sort(c);
     }
 
 
     public void clickedSortEngagement(Button button) {
         sortingLabel.setText("Sorting by Engagement Rate");
+        button.disable();
+        ComparatorER c = new ComparatorER();
+        data.sort(c);
     }
 
 
@@ -115,20 +125,19 @@ public class GUIWindow {
         engagementType.setText("Reach Engagement Rate");
     }
 
-
+    
     public void clickedMonth(Button button) {
         String month = button.getTitle().toLowerCase();
-        switch (month) {
-            case "january":
-                timeFrame.setText("January");
-            case "february":
-                timeFrame.setText("February");
-            case "march":
-                timeFrame.setText("March");
-            default:
-                timeFrame.setText("January");
+        System.out.println(month);
+        if (month.equals("january")) {
+            timeFrame.setText("January");
         }
-        
+        else if (month.equals("february")) {
+            timeFrame.setText("February");
+        }
+        else {
+            timeFrame.setText("March");
+        }
     }
 
 
