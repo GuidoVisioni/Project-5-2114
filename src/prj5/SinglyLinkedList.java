@@ -18,7 +18,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
     private Node firstNode;
 
     /**
-     * creates a new linked list object with no entries in it
+     * Constructor. Creates empty list
      */
     public SinglyLinkedList() {
         size = 0;
@@ -27,7 +27,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
     /**
-     * Tells whether or not the list is empty
+     * Checks if the list is empty
      * 
      * @return
      *         true if the list is empty, false if not
@@ -38,7 +38,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
     /**
-     * adds a new entry to the end of the linked list
+     * Adds a new entry to the end of the linked list
      * 
      * @param newEntry
      *            the entry being added
@@ -63,17 +63,16 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
     /**
-     * adds a new node to the list at the given index
+     * Adds a new node to the list at the given index
      * 
      * @param index
-     *            the spot in the list where the node is being added (starting
-     *            at 0)
+     *            index where the new node is to be added
      * @param newEntry
      *            the data being added to the list
      * @throws IllegalArgumentException
      *             if newEntry is null
      * @throws IndexOutOfBoundsException
-     *             if the index is not in the range of the list
+     *             if the index is not in the range of the list of the list
      */
     @Override
     public void add(int index, E newEntry) {
@@ -115,7 +114,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
     /**
-     * completely clears the list of all entries
+     * Completely clears the list of all entries. List will be empty.
      */
     @Override
     public void clear() {
@@ -125,12 +124,12 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
     /**
-     * checks whether or not the list has a node containing the given data
+     * Checks whether or not the list has a node containing the given data
      * 
      * @param entry
      *            the data being searched for
      * @return
-     *         true if the data is in the list, false ifnot
+     *         true if the data is in the list, false if not
      */
     @Override
     public boolean contains(E entry) {
@@ -146,14 +145,14 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
     /**
-     * gets the data at a given index in the list
+     * Gets the data at a given index in the list
      * 
      * @param index
-     *            the position in the list (starting at 0)
+     *            index in the list
      * @return
      *         the data at index
      * @throws IndexOutOfBoundsException
-     *             when the index is not in the list
+     *             when the index is not in the range of the list
      */
     @Override
     public E getEntry(int index) {
@@ -172,10 +171,10 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
     /**
-     * gets the current size of the list
+     * Gets the current size of the list
      * 
      * @return
-     *         the number of entries in the list
+     *         size (number of entries in the list)
      */
     @Override
     public int getLength() {
@@ -184,15 +183,14 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
     /**
-     * removes the node at the given index from the list
+     * Removes the node at the given index from the list
      * 
      * @param index
-     *            the position of the node in the list being removed (starting
-     *            at 0)
+     *            index where the node is to be removed
      * @return
      *         the data in the removed node
      * @throws IndexOutOfBoundsException
-     *             if the index is negative or longer than the list
+     *             when the index is not in the range of the list
      */
     @Override
     public E remove(int index) {
@@ -225,18 +223,18 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
     /**
-     * replaces the data at a given index
+     * Replaces the data at a given index
      * 
      * @param index
-     *            the position that is being replace (starts at 0)
+     *            index that is being replace
      * @param newEntry
-     *            the new data at index
+     *            the new data be be added
      * @return
      *         the old data at index
      * @throws IllegalArgumentException
      *             when newEntry is null
      * @throws IndexOutOfBoundsException
-     *             when index is not in the range of the list
+     *             when the index is not in the range of the list
      */
     @Override
     public E replace(int index, E newEntry) {
@@ -261,6 +259,13 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
     }
 
 
+    /**
+     * Turns the linked list into an array
+     * 
+     * @return
+     *         An array containing the same data as the original list at the
+     *         same indices
+     */
     @SuppressWarnings("unchecked")
     @Override
     public Object[] toArray() {
@@ -276,6 +281,12 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
     }
 
 
+    /**
+     * Iterator
+     * 
+     * @return
+     *         Return the iterator
+     */
     @Override
     public Iterator<E> iterator() {
         return new SLListIterator<E>();
@@ -286,6 +297,9 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
         private Node next;
         private boolean calledNext;
 
+        /**
+         * Constructor. Creates iterator
+         */
         public SLListIterator() {
             next = firstNode;
             calledNext = false;
@@ -293,7 +307,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
         /**
-         * checks if there is another entry in the list
+         * Checks if there is another entry in the list
          * 
          * @return
          *         true if there is another entry, false if not
@@ -305,12 +319,12 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
         /**
-         * moves the iterator one spot down
+         * Moves the iterator one node forward
          * 
          * @return
-         *         the next value
+         *         the value within the node it passes over
          * @throws NoSuchElementException
-         *             when there is no element to iterate over
+         *             when there is no node to iterate over
          */
         @Override
         public E next() {
@@ -326,19 +340,13 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
     }
 
 
-    /**
-     * A node object for building the linked list
-     * 
-     * @author hsabbott
-     * @version 2022.11.13
-     */
     private class Node {
 
         private E data;
         private Node next;
 
         /**
-         * creates a new node object with data but no next node
+         * Creates a new node object with data but no next node
          * 
          * @param entry
          *            the data that the node is holding
@@ -349,7 +357,7 @@ public class SinglyLinkedList<E> implements ListInterface<E>, Iterable<E> {
 
 
         /**
-         * sets the next node
+         * Sets the next node
          * 
          * @param nextNode
          *            the next node
