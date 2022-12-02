@@ -38,7 +38,7 @@ public class GUIWindow {
         data = calculator;
 
         // initialize buttons
-        sortByName = new Button("Sort by Name");
+        sortByName = new Button("Sort by Channel Name");
         sortByName.onClick("clickedSortName");
         window.addButton(sortByName, WindowSide.NORTH);
 
@@ -70,7 +70,7 @@ public class GUIWindow {
         marchButton.onClick("clickedMonth");
         window.addButton(marchButton, WindowSide.SOUTH);
 
-        quarterButton = new Button("First Quarter");
+        quarterButton = new Button("First Quarter (Jan - March)");
         quarterButton.onClick("clickedQuarter");
         window.addButton(quarterButton, WindowSide.SOUTH);
 
@@ -81,7 +81,7 @@ public class GUIWindow {
 
 
     public void clickedSortName(Button button) {
-
+        
     }
 
 
