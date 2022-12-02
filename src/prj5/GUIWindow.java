@@ -73,7 +73,17 @@ public class GUIWindow {
         quarterButton = new Button("First Quarter (Jan - March)");
         quarterButton.onClick("clickedQuarter");
         window.addButton(quarterButton, WindowSide.SOUTH);
-
+        
+        timeFrame = new TextShape(1, 1, "January");
+        window.addShape(timeFrame);
+        
+        sortingLabel = new TextShape(1, 21, "Traditional Engagement Rate");
+        window.addShape(sortingLabel);
+        
+        engagementType = new TextShape(1, 41, "Sorting by Engagement Rate");
+        window.addShape(engagementType);
+        
+        window.addShape(new Shape(100, 100, 10, 10));
     }
 
     // If traditional engagement rate or reach engagement rate from the
