@@ -81,7 +81,7 @@ public class InfluencerCalculatorTest extends TestCase {
      */
     public void testSortAlphabetical() {
 
-        calc.sort(list, compareA);
+        calc.sort(compareA);
         Object[] listArray = list.toArray();
         Object[] arrayComp = new Object[] { infl2, infl1, infl4, infl3, infl6,
             infl5, infl7, infl8 };
@@ -93,7 +93,7 @@ public class InfluencerCalculatorTest extends TestCase {
      * tests the sort method for the engagement rate
      */
     public void testSortEngagementRate() {
-        calc.sort(list, compareER);
+        calc.sort(compareER);
         Object[] listArray = list.toArray();
         Object[] arrayComp = new Object[] { infl5, infl7, infl8, infl2, infl3,
             infl1, infl6, infl4 };
