@@ -126,34 +126,43 @@ public class InfluencerCalculator {
      * @return
      *         Quarterly traditional engagement rate formatted "#.#"
      */
-    public double getTradEngageForQuart(String channelName) {
+    public double[] getTradEngageForQuart() {
         double tradER = 0;
-        Influencer marchMan = influencers.getEntry(0);
-        String[] firstQuarter = { "january", "february", "march" };
-        for (int i = 0; i < influencers.getLength(); i++) {
-            if (influencers.getEntry(i).getChannelName().toLowerCase().equals(
-                channelName)) {
-                for (int j = 0; j < firstQuarter.length; j++) {
-                    if (influencers.getEntry(i).getMonth().toLowerCase().equals(
-                        firstQuarter[2])) {
-                        marchMan = influencers.getEntry(i);
-                    }
-                    if (influencers.getEntry(i).getMonth().toLowerCase().equals(
-                        firstQuarter[j])) {
-                        tradER += influencers.getEntry(i).getTotalEngagement();
-                    }
-                    else {
-                        tradER += 0;
-                    }
-                }
+        double[] engageRates = null;
+        Influencer janMan = null;
+        Influencer febMan = null;
+        Influencer marMan = null;
+
+        for (int i = 0; i < janInfluencers.getLength(); i++) {
+            String name = janInfluencers.getEntry(i).getChannelName()
+                .toLowerCase();
+            janMan = janInfluencers.getEntry(i);
+
+            for (int j = 0; j < febInfluencers.getLength(); j++) {
+                if (febInfluencers.getEntry(j).getChannelName().toLowerCase()
+                    .equals(name))
+                    ;
+                febMan = febInfluencers.getEntry(j);
+            }
+            for (int k = 0; k < marInfluencers.getLength(); k++) {
+                if (marInfluencers.getEntry(k).getChannelName().toLowerCase()
+                    .equals(name))
+                    ;
+                marMan = marInfluencers.getEntry(k);
+            }
+            if (marMan.getFollowers() == 0) {
+                engageRates[i] = -1;
+            }
+            else {
+                tradER = janMan.getTotalEngagement() + febMan
+                    .getTotalEngagement() + marMan.getTotalEngagement();
+                DecimalFormat format = new DecimalFormat("#.#");
+                double formattedTradER = Double.valueOf(format.format((tradER
+                    / marMan.getFollowers()) * 100));
+                engageRates[i] = formattedTradER;
             }
         }
-        if (marchMan.getFollowers() == 0) {
-            return -1;
-        }
-        DecimalFormat format = new DecimalFormat("#.#");
-        return Double.valueOf(format.format((tradER / marchMan.getFollowers())
-            * 100));
+        return engageRates;
     }
 
 
@@ -179,29 +188,46 @@ public class InfluencerCalculator {
      * @return
      *         Quarterly reach engagement rate formatted "#.#"
      */
-    public double getEngageReachForQuart(String channelName) {
+    public double[] getEngageReachForQuart() {
         double totalEngage = 0;
         double totalViews = 0;
+        double[] engageRates = null;
+        Influencer janMan = null;
+        Influencer febMan = null;
+        Influencer marMan = null;
 
-        String[] firstQuarter = { "january", "february", "march" };
-        for (int i = 0; i < influencers.getLength(); i++) {
-            if (influencers.getEntry(i).getChannelName().toLowerCase().equals(
-                channelName)) {
-                for (int j = 0; j < firstQuarter.length; j++) {
-                    if (influencers.getEntry(i).getMonth().toLowerCase().equals(
-                        firstQuarter[j])) {
-                        totalEngage += influencers.getEntry(i)
-                            .getTotalEngagement();
-                        totalViews += influencers.getEntry(i).getViews();
-                    }
-                    else {
-                        totalEngage += 0;
-                        totalViews += 0;
-                    }
-                }
+        for (int i = 0; i < janInfluencers.getLength(); i++) {
+            String name = janInfluencers.getEntry(i).getChannelName()
+                .toLowerCase();
+            janMan = janInfluencers.getEntry(i);
+
+            for (int j = 0; j < febInfluencers.getLength(); j++) {
+                if (febInfluencers.getEntry(j).getChannelName().toLowerCase()
+                    .equals(name))
+                    ;
+                febMan = febInfluencers.getEntry(j);
+            }
+            for (int k = 0; k < marInfluencers.getLength(); k++) {
+                if (marInfluencers.getEntry(k).getChannelName().toLowerCase()
+                    .equals(name))
+                    ;
+                marMan = marInfluencers.getEntry(k);
+            }
+            totalEngage = janMan.getTotalEngagement() + febMan
+                .getTotalEngagement() + marMan.getTotalEngagement();
+            totalViews = janMan.getViews() + febMan.getViews() + marMan
+                .getViews();
+            if(totalViews == 0)
+            {
+                engageRates[i] = -1;
+            }
+            else
+            {
+            DecimalFormat format = new DecimalFormat("#.#");
+            double reachEngage = Double.valueOf(format.format((totalEngage / totalViews) * 100));
+            engageRates[i]  = reachEngage;
             }
         }
-        DecimalFormat format = new DecimalFormat("#.#");
-        return Double.valueOf(format.format((totalEngage / totalViews) * 100));
+        return engageRates;
     }
 }
