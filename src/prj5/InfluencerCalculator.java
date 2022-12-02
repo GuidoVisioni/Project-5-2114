@@ -13,6 +13,9 @@ import java.util.Comparator;
 public class InfluencerCalculator {
 
     private SinglyLinkedList<Influencer> influencers;
+    private SinglyLinkedList<Influencer> janInfluencers; 
+    private SinglyLinkedList<Influencer> febInfluencers; 
+    private SinglyLinkedList<Influencer> marInfluencers; 
 
     /**
      * Constructor
@@ -25,6 +28,9 @@ public class InfluencerCalculator {
             throw new IllegalArgumentException();
         }
         this.influencers = influencerList;
+        this.janInfluencers = createMonthList("january");
+        this.febInfluencers = createMonthList("february");
+        this.marInfluencers = createMonthList("march");
     }
 
 
@@ -38,6 +44,35 @@ public class InfluencerCalculator {
         return influencers;
     }
 
+    /**
+     * Gets influencer list for january
+     * 
+     * @return
+     *         list of influencers for january
+     */
+    public SinglyLinkedList<Influencer> getJanInfluencers() {
+        return janInfluencers;
+    }
+    
+    /**
+     * Gets influencer list for february
+     * 
+     * @return
+     *         list of influencers for february
+     */
+    public SinglyLinkedList<Influencer> getFebInfluencers() {
+        return febInfluencers;
+    }
+    
+    /**
+     * Gets influencer list for march
+     * 
+     * @return
+     *         list of influencers for march
+     */
+    public SinglyLinkedList<Influencer> getMarInfluencers() {
+        return marInfluencers;
+    }
 
     /**
      * Sorts the linked list
@@ -106,12 +141,14 @@ public class InfluencerCalculator {
     }
     
     
-    private SinglyLinkedList<Influencer> createQuarter(String timePeriod) {
-        SinglyLinkedList monthList = new SinglyLinkedList();
-        String time = timePeriod;
+    private SinglyLinkedList<Influencer> createMonthList(String timePeriod) {
+        SinglyLinkedList<Influencer> monthList = 
+            new SinglyLinkedList<Influencer>();
+        String time = timePeriod.toLowerCase();
         for (int i = 0; i < influencers.getLength(); i++) {
-            if (i == 0) {
-                monthList.add(influencers.getEntry(0));
+            Influencer curr = influencers.getEntry(i);
+            if (curr.getMonth().toLowerCase().equals(time)) {
+                monthList.add(curr);
             }
         }
         return monthList;
