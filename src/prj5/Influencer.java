@@ -3,9 +3,9 @@ package prj5;
 import java.text.DecimalFormat;
 
 /**
- * Influencer Object Class
+ * Influencer object class. Responsible for creating influencers
  * 
- * @author ramamittal
+ * @author rama04, hsabbott, gjvisioni25
  * @version 11/15/2022
  *
  */
@@ -26,25 +26,25 @@ public class Influencer {
      * Constructor
      * 
      * @param month
-     *            Month
+     *            Month data corresponds to
      * @param username
-     *            username
+     *            username of influencer
      * @param channelName
-     *            ChannelName
+     *            Channel name of influencer
      * @param country
-     *            Country
+     *            Country of influencer
      * @param mainTopic
-     *            mainTopic
+     *            Main topic of channel
      * @param likes
-     *            likes
+     *            Likes in the month
      * @param posts
-     *            posts
+     *            Posts in the month
      * @param followers
-     *            followers
+     *            Followers in the month
      * @param comments
-     *            comments
+     *            Comments in the month
      * @param views
-     *            views
+     *            Views in the month
      */
     public Influencer(
         String month,
@@ -70,8 +70,9 @@ public class Influencer {
         this.views = views;
     }
 
+
     /**
-     * Gets month
+     * Gets the month
      * 
      * @return
      *         month
@@ -82,7 +83,7 @@ public class Influencer {
 
 
     /**
-     * Gets username
+     * Gets the username
      * 
      * @return
      *         username
@@ -93,7 +94,7 @@ public class Influencer {
 
 
     /**
-     * Get channel name
+     * Get the channel name
      * 
      * @return
      *         channelName
@@ -104,7 +105,7 @@ public class Influencer {
 
 
     /**
-     * Get country
+     * Get the country
      * 
      * @return
      *         country
@@ -115,7 +116,7 @@ public class Influencer {
 
 
     /**
-     * Get main topic
+     * Get the main topic
      * 
      * @return
      *         mainTopic
@@ -126,7 +127,7 @@ public class Influencer {
 
 
     /**
-     * Get likes
+     * Get the likes
      * 
      * @return
      *         likes
@@ -137,7 +138,7 @@ public class Influencer {
 
 
     /**
-     * Get posts
+     * Get the posts
      * 
      * @return
      *         posts
@@ -148,7 +149,7 @@ public class Influencer {
 
 
     /**
-     * Get followers
+     * Get the followers
      * 
      * @return
      *         followers
@@ -159,7 +160,7 @@ public class Influencer {
 
 
     /**
-     * Get comments
+     * Get the comments
      * 
      * @return
      *         comments
@@ -170,7 +171,7 @@ public class Influencer {
 
 
     /**
-     * Get views
+     * Get the views
      * 
      * @return
      *         views
@@ -181,57 +182,40 @@ public class Influencer {
 
 
     /**
-     * Set views
-     * @param view
-     *     the number of views
-     */
-    public void setViews(int view) {
-        views = view;
-    }
-
-    /**
-     * gets the total engagement
+     * Gets the total engagement for the month
+     * 
      * @return
-     *     the total engagement
+     *         likes + comments
      */
     public int getTotalEngagement() {
         return this.getLikes() + this.getComments();
     }
 
 
-    private int getReach() {
-        return this.getViews();
-    }
-
-
-    private int getFollowerCount() {
-        return this.getFollowers();
-    }
-
-
     /**
-     * Get the traditional engagement for an influencer
+     * Get the traditional engagement for an influencer for the month
      * 
      * @return
-     *         Traditional Engagement
+     *         Traditional Engagement Rate
      */
     public double getEngagementTraditional() {
-        if (this.getFollowerCount() == 0) {
+        if (this.getFollowers() == 0) {
             return -1;
         }
         double total = Double.valueOf(this.getTotalEngagement());
-        double follower = Double.valueOf(this.getFollowerCount());
+        double follower = Double.valueOf(this.getFollowers());
         DecimalFormat format = new DecimalFormat("#.#");
         return Double.valueOf(format.format((total / follower) * 100));
     }
 
     /**
      * gets the traditional engagement without dividing
+     * 
      * @return
-     *     the traditional engeagement without dividing
+     *         the traditional engagement without dividing
      */
     public double getEngagementTraditionalNoDiv() {
-        if (this.getFollowerCount() == 0) {
+        if (this.getFollowers() == 0) {
             return -1;
         }
         double total = Double.valueOf(this.getTotalEngagement());
@@ -247,11 +231,11 @@ public class Influencer {
      *         Reach Engagement
      */
     public double getEngagementReach() {
-        if (this.getReach() == 0) {
+        if (this.getViews() == 0) {
             return -1;
         }
         double total = Double.valueOf(this.getTotalEngagement());
-        double reach = Double.valueOf(this.getReach());
+        double reach = Double.valueOf(this.getViews());
         DecimalFormat format = new DecimalFormat("#.#");
         return Double.valueOf(format.format((total / reach) * 100));
     }

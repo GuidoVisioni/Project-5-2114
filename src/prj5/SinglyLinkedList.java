@@ -7,8 +7,8 @@ import list.ListInterface;
 /**
  * A singly linked list of nodes
  * 
- * @author hsabbott
- * @version 2022.11.13
+ * @author rama04, hsabbott, gjvisioni25
+ * @version 11/13/2022
  * @param <E>
  *     the datatype the list is holding
  */

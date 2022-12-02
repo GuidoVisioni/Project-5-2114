@@ -3,6 +3,12 @@ package prj5;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 
+/**
+ * 
+ * @author rama04, hsabbott, gjvisioni25
+ * @version 11/18/2022
+ *
+ */
 public class Input {
 
     public static void main(String[] args) throws FileNotFoundException {

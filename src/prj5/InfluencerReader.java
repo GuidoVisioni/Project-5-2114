@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * ColonyReader class
  * 
- * @author Guido Visioni (gjvisioni25)
+ * @author rama04, hsabbott, gjvisioni25
  * @version 11/08/2022
  */
 public class InfluencerReader {

@@ -13,8 +13,8 @@ import student.testingsupport.annotations.Hint;
  * 
  * Utilizes provided test class to help test the coverage
  * 
- * @author hsabbott
- * @version 2022.11.18
+ * @author rama04, hsabbott, gjvisioni25
+ * @version 11/18/2022
  */
 public class InfluencerCalculatorTest extends TestCase {
 

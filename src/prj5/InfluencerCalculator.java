@@ -6,7 +6,7 @@ import java.util.Comparator;
 /**
  * Influencer Calculator Class
  * 
- * @author Guido Visioni (gjvisioni25)
+ * @author rama04, hsabbott, gjvisioni25
  * @version 11/18/2022
  *
  */
@@ -27,7 +27,21 @@ public class InfluencerCalculator {
         this.influencers = influencerList;
     }
 
+    private void insertInOrder(
+        Influencer entry,
+        SinglyLinkedList<Influencer> influencer,
+        int end,
+        Comparator<Influencer> c) {
+        int index = end;
 
+        while ((index >= 0) && (c.compare(entry, influencer.getEntry(
+            index)) < 0)) {
+            influencer.replace(index + 1, influencer.getEntry(index));
+            index--;
+        }
+
+        influencer.replace(index + 1, entry);
+    }
     /**
      * 
      * @param influencer
@@ -43,23 +57,6 @@ public class InfluencerCalculator {
             insertInOrder(influencer.getEntry(i), influencer, i - 1, c);
         }
 
-    }
-
-
-    private void insertInOrder(
-        Influencer entry,
-        SinglyLinkedList<Influencer> influencer,
-        int end,
-        Comparator<Influencer> c) {
-        int index = end;
-
-        while ((index >= 0) && (c.compare(entry, influencer.getEntry(
-            index)) < 0)) {
-            influencer.replace(index + 1, influencer.getEntry(index));
-            index--;
-        }
-
-        influencer.replace(index + 1, entry);
     }
 
 
