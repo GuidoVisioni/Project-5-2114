@@ -97,7 +97,6 @@ public class GUIWindow {
 
     public void clickedSortName(Button button) {
         sortingLabel.setText("Sorting by Channel Name");
-        button.disable();
         ComparatorAlphabetical c = new ComparatorAlphabetical();
         data.sort(c);
     }
@@ -105,7 +104,6 @@ public class GUIWindow {
 
     public void clickedSortEngagement(Button button) {
         sortingLabel.setText("Sorting by Engagement Rate");
-        button.disable();
         ComparatorER c = new ComparatorER();
         data.sort(c);
     }
@@ -128,7 +126,6 @@ public class GUIWindow {
     
     public void clickedMonth(Button button) {
         String month = button.getTitle().toLowerCase();
-        System.out.println(month);
         if (month.equals("january")) {
             timeFrame.setText("January");
         }
