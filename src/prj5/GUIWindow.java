@@ -87,13 +87,21 @@ public class GUIWindow {
         sortingLabel = new TextShape(1, 41, "Sorting by Engagement Rate");
         window.addShape(sortingLabel);
         
+        rect1 = new Shape(70, 150, 30, 200);
+        window.addShape(rect1);
         
-        window.addShape(new Shape(100, 100, 10, 10));
+        rect2 = new Shape(140, 220, 30, 130);
+        window.addShape(rect2);
+        
+        rect3 = new Shape(210, 250, 30, 100);
+        window.addShape(rect3);
+        
+        rect4 = new Shape(280, 273, 30, 77);
+        window.addShape(rect4);
     }
 
     // If traditional engagement rate or reach engagement rate from the
     // influencer class return -1 then depict N/A for those values on the GUI
-
 
     public void clickedSortName(Button button) {
         sortingLabel.setText("Sorting by Channel Name");

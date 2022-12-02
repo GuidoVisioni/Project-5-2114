@@ -104,6 +104,18 @@ public class InfluencerCalculator {
         return Double.valueOf(format.format((tradER / marchMan.getFollowers())
             * 100));
     }
+    
+    
+    private SinglyLinkedList<Influencer> createQuarter(String timePeriod) {
+        SinglyLinkedList monthList = new SinglyLinkedList();
+        String time = timePeriod;
+        for (int i = 0; i < influencers.getLength(); i++) {
+            if (i == 0) {
+                monthList.add(influencers.getEntry(0));
+            }
+        }
+        return monthList;
+    }
 
 
     /**
