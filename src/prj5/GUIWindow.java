@@ -22,13 +22,16 @@ public class GUIWindow {
     private TextShape timeFrame;
     private TextShape engagementType;
     private TextShape sortingLabel;
-    private AList<Shape> influencerBars;
-    private AList<TextShape> barLabels;
     private InfluencerCalculator data;
+    private String timePeriod;
     private Shape rect1;
     private Shape rect2;
     private Shape rect3;
     private Shape rect4;
+    private TextShape rectLabel1;
+    private TextShape rectLabel2;
+    private TextShape rectLabel3;
+    private TextShape rectLabel4;
     
     /**
      * creates a new GUIWindow object
@@ -136,18 +139,37 @@ public class GUIWindow {
         String month = button.getTitle().toLowerCase();
         if (month.equals("january")) {
             timeFrame.setText("January");
+            timePeriod = "january";
+            
+            
         }
         else if (month.equals("february")) {
             timeFrame.setText("February");
+            timePeriod = "february";
         }
         else {
             timeFrame.setText("March");
+            timePeriod = "march";
         }
     }
 
 
     public void clickedQuarter(Button button) {
         timeFrame.setText("First Quarter (Jan - March)");
+        timePeriod = "quarter";
+        SinglyLinkedList<Influencer> firstQInf =
+            new SinglyLinkedList<Influencer>();
+        int entry = 0;
+        while (entry != data.getInfluencers().getLength()) {
+            String time = data.getInfluencers().getEntry(entry).getMonth()
+                .toLowerCase();
+            if (time.equals("january") || time.equals("february") || time
+                .equals("march")) {
+                firstQInf.add(data.getInfluencers().getEntry(entry));
+            }
+
+        }
+
     }
 
 
@@ -158,5 +180,10 @@ public class GUIWindow {
 
     private SinglyLinkedList<Influencer> getDataForMonth(String month) {
         return null;
+    }
+    
+    private void updateBars(SinglyLinkedList<Influencer> list) {
+        
+        
     }
 }
