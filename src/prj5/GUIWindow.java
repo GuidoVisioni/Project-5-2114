@@ -110,10 +110,10 @@ public class GUIWindow {
         bars.add(rect4);
         
         barLabels = new AList<TextShape>();
-        bars.add(rectLabel1);
-        bars.add(rectLabel2);
-        bars.add(rectLabel3);
-        bars.add(rectLabel4);
+        barLabels.add(rectLabel1);
+        barLabels.add(rectLabel2);
+        barLabels.add(rectLabel3);
+        barLabels.add(rectLabel4);
     }
 
     // If traditional engagement rate or reach engagement rate from the
@@ -122,14 +122,30 @@ public class GUIWindow {
     public void clickedSortName(Button button) {
         sortingLabel.setText("Sorting by Channel Name");
         ComparatorAlphabetical c = new ComparatorAlphabetical();
-       // data.sort(c);
+        data.sortTraditional(c);
+        if (timePeriod.equals("january")) {
+            updateBars(data.getJanInfluencers());
+        }
+        else if (timePeriod.equals("february")) {
+            updateBars(data.getFebInfluencers());
+        }
+        else if (timePeriod.equals("march")) {
+            updateBars(data.getMarInfluencers());
+        }
     }
 
 
     public void clickedSortEngagement(Button button) {
         sortingLabel.setText("Sorting by Engagement Rate");
-        ComparatorER c = new ComparatorER();
-      //  data.sort(c);
+        if (timePeriod.equals("january")) {
+            updateBars(data.getJanInfluencers());
+        }
+        else if (timePeriod.equals("february")) {
+            updateBars(data.getFebInfluencers());
+        }
+        else if (timePeriod.equals("march")) {
+            updateBars(data.getMarInfluencers());
+        }
     }
 
 
@@ -140,11 +156,33 @@ public class GUIWindow {
 
     public void clickedTradEngage(Button button) {
         engagementType.setText("Traditional Engagement Rate");
+        ComparatorER c = new ComparatorER();
+        data.sortTraditional(c);
+        if (timePeriod.equals("january")) {
+            updateBars(data.getJanInfluencers());
+        }
+        else if (timePeriod.equals("february")) {
+            updateBars(data.getFebInfluencers());
+        }
+        else if (timePeriod.equals("march")) {
+            updateBars(data.getMarInfluencers());
+        }
     }
 
 
     public void clickedReachEngage(Button button) {
         engagementType.setText("Reach Engagement Rate");
+        ComparatorER c = new ComparatorER();
+        data.sortReach(c);
+        if (timePeriod.equals("january")) {
+            updateBars(data.getJanInfluencers());
+        }
+        else if (timePeriod.equals("february")) {
+            updateBars(data.getFebInfluencers());
+        }
+        else if (timePeriod.equals("march")) {
+            updateBars(data.getMarInfluencers());
+        }
     }
 
     
@@ -153,16 +191,17 @@ public class GUIWindow {
         if (month.equals("january")) {
             timeFrame.setText("January");
             timePeriod = "january";
-            
-            
+            updateBars(data.getJanInfluencers());
         }
         else if (month.equals("february")) {
             timeFrame.setText("February");
             timePeriod = "february";
+            updateBars(data.getFebInfluencers());
         }
         else {
             timeFrame.setText("March");
             timePeriod = "march";
+            updateBars(data.getMarInfluencers());
         }
     }
 
@@ -170,18 +209,19 @@ public class GUIWindow {
     public void clickedQuarter(Button button) {
         timeFrame.setText("First Quarter (Jan - March)");
         timePeriod = "quarter";
-        SinglyLinkedList<Influencer> firstQInf =
-            new SinglyLinkedList<Influencer>();
-        int entry = 0;
-        while (entry != data.getInfluencers().getLength()) {
-            String time = data.getInfluencers().getEntry(entry).getMonth()
-                .toLowerCase();
-            if (time.equals("january") || time.equals("february") || time
-                .equals("march")) {
-                firstQInf.add(data.getInfluencers().getEntry(entry));
-            }
-            entry++;
-        }
+        
+//        SinglyLinkedList<Influencer> firstQInf =
+//            new SinglyLinkedList<Influencer>();
+//        int entry = 0;
+//        while (entry != data.getInfluencers().getLength()) {
+//            String time = data.getInfluencers().getEntry(entry).getMonth()
+//                .toLowerCase();
+//            if (time.equals("january") || time.equals("february") || time
+//                .equals("march")) {
+//                firstQInf.add(data.getInfluencers().getEntry(entry));
+//            }
+//            entry++;
+//        }
 
     }
 
@@ -196,25 +236,22 @@ public class GUIWindow {
     }
     
     private void updateBars(SinglyLinkedList<Influencer> list) {
-        window.removeShape(rect1);
-        window.removeShape(rect2);
-        window.removeShape(rect3);
-        window.removeShape(rect4);
-        window.removeShape(rectLabel1);
-        window.removeShape(rectLabel2);
-        window.removeShape(rectLabel3);
-        window.removeShape(rectLabel4);
+        for (int k = 0; k < 4; k++) {
+            window.removeShape(bars.getEntry(k));
+            window.removeShape(barLabels.getEntry(k));
+        }
         for (int i = 0; i < list.getLength(); i++) {
             String barName = list.getEntry(i).getChannelName();
             double engage = list.getEntry(i).getPosts();
-            int height = (int)engage * 15; 
-            Shape rect = new Shape(70 * (i+1), 350 - height, 30, height);
+            System.out.println(engage);
+            int height = (int)Math.round(engage);
+            Shape rect = new Shape(70 * (i+1), 200 - height, 30, height);
             bars.replace(i, rect);
             TextShape rectLabel = new 
-                TextShape(70 * (i + 1), 360 - height, barName + engage);
+                TextShape(70 * (i + 1), 200 - height, barName + engage);
             barLabels.replace(i, rectLabel);
         }
-        for (int j = 0; j < bars.getLength(); j++) {
+        for (int j = 0; j < 4; j++) {
             window.addShape(bars.getEntry(j));
             window.addShape(barLabels.getEntry(j));
         }

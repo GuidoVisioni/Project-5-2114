@@ -267,6 +267,8 @@ public class InfluencerCalculator {
                 janInfluencers.getEntry(i).setPosts(reachEngage);
             }
         }
+        ComparatorER compareER = new ComparatorER();
+        sortReach(compareER);
         return janInfluencers;
     }
 }
