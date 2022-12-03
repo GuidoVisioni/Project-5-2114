@@ -133,11 +133,11 @@ public class GUIWindow {
         if (timePeriod.equals("quarter")) {
             if (engagementType.getText().contains("Traditional")) {
                 data.sortTraditionalQuart(c);
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
             else {
                 data.sortReachQuart(c);
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
         }
         else if (engagementType.getText().contains("Traditional")) {
@@ -167,11 +167,11 @@ public class GUIWindow {
         if (timePeriod.equals("quarter")) {
             if (engagementType.getText().contains("Traditional")) {
                 data.sortTraditionalQuart(c);
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
             else {
                 data.sortReachQuart(c);
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
         }
         else if (engagementType.getText().contains("Traditional")) {
@@ -192,11 +192,11 @@ public class GUIWindow {
         else if (timePeriod.equals("quarter")) {
             if (engagementType.getText().contains("Traditional")) {
                 data.getTradEngageForQuart();
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
             else {
                 data.getEngageReachForQuart();
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
         }
     }
@@ -231,7 +231,7 @@ public class GUIWindow {
         else if (timePeriod.equals("quarter")) {
             data.getTradEngageForQuart();
             data.sortTraditionalQuart(c);
-            updateBars(data.getJanInfluencers());
+            updateBars(data.getFebInfluencers());
         }
     }
 
@@ -260,7 +260,7 @@ public class GUIWindow {
         else if (timePeriod.equals("quarter")) {
             data.getEngageReachForQuart();
             data.sortReachQuart(c);
-            updateBars(data.getJanInfluencers());
+            updateBars(data.getFebInfluencers());
         }
     }
 
@@ -313,12 +313,12 @@ public class GUIWindow {
             if (engagementType.getText().contains("Traditional")) {
                 data.getTradEngageForQuart();
                 data.sortTraditionalQuart(c);
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
             else {
                 data.getEngageReachForQuart();
                 data.sortReachQuart(c);
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
         }
         else {
@@ -326,12 +326,12 @@ public class GUIWindow {
             if (engagementType.getText().contains("Traditional")) {
                 data.getTradEngageForQuart();
                 data.sortTraditionalQuart(c);
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
             else {
                 data.getEngageReachForQuart();
                 data.sortReachQuart(c);
-                updateBars(data.getJanInfluencers());
+                updateBars(data.getFebInfluencers());
             }
         }
     }
