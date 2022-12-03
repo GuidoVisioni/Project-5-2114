@@ -212,15 +212,15 @@ public class InfluencerCalculator {
         Influencer febMan = null;
         Influencer marMan = null;
 
-        for (int i = 0; i < janInfluencers.getLength(); i++) {
-            String name = janInfluencers.getEntry(i).getChannelName()
+        for (int i = 0; i < febInfluencers.getLength(); i++) {
+            String name = febInfluencers.getEntry(i).getChannelName()
                 .toLowerCase();
-            janMan = janInfluencers.getEntry(i);
+            janMan = febInfluencers.getEntry(i);
 
-            for (int j = 0; j < febInfluencers.getLength(); j++) {
-                if (febInfluencers.getEntry(j).getChannelName().toLowerCase()
+            for (int j = 0; j < janInfluencers.getLength(); j++) {
+                if (janInfluencers.getEntry(j).getChannelName().toLowerCase()
                     .equals(name))
-                    febMan = febInfluencers.getEntry(j);
+                    febMan = janInfluencers.getEntry(j);
             }
             for (int k = 0; k < marInfluencers.getLength(); k++) {
                 if (marInfluencers.getEntry(k).getChannelName().toLowerCase()
@@ -228,7 +228,7 @@ public class InfluencerCalculator {
                     marMan = marInfluencers.getEntry(k);
             }
             if (marMan.getFollowers() == 0) {
-                janInfluencers.getEntry(i).setPosts(-1);
+                febInfluencers.getEntry(i).setPosts(-1);
             }
             else {
                 tradER = janMan.getTotalEngagement() + febMan
@@ -236,12 +236,12 @@ public class InfluencerCalculator {
                 DecimalFormat format = new DecimalFormat("#.#");
                 double formattedTradER = Double.valueOf(format.format((tradER
                     / marMan.getFollowers()) * 100));
-                janInfluencers.getEntry(i).setPosts(formattedTradER);
+                febInfluencers.getEntry(i).setPosts(formattedTradER);
             }
         }
 //        ComparatorER compareER = new ComparatorER();
 //        sortTraditionalQuart(compareER);
-        return janInfluencers;
+        return febInfluencers;
     }
 
 
@@ -274,16 +274,16 @@ public class InfluencerCalculator {
         Influencer febMan = null;
         Influencer marMan = null;
 
-        for (int i = 0; i < janInfluencers.getLength(); i++) {
-            String name = janInfluencers.getEntry(i).getChannelName()
+        for (int i = 0; i < febInfluencers.getLength(); i++) {
+            String name = febInfluencers.getEntry(i).getChannelName()
                 .toLowerCase();
-            janMan = janInfluencers.getEntry(i);
+            febMan = febInfluencers.getEntry(i);
 
-            for (int j = 0; j < febInfluencers.getLength(); j++) {
-                if (febInfluencers.getEntry(j).getChannelName().toLowerCase()
+            for (int j = 0; j < janInfluencers.getLength(); j++) {
+                if (janInfluencers.getEntry(j).getChannelName().toLowerCase()
                     .equals(name))
                     ;
-                febMan = febInfluencers.getEntry(j);
+                janMan = janInfluencers.getEntry(j);
             }
             for (int k = 0; k < marInfluencers.getLength(); k++) {
                 if (marInfluencers.getEntry(k).getChannelName().toLowerCase()
@@ -296,17 +296,17 @@ public class InfluencerCalculator {
             totalViews = janMan.getViews() + febMan.getViews() + marMan
                 .getViews();
             if (totalViews == 0) {
-                janInfluencers.getEntry(i).setPosts(-1);
+                febInfluencers.getEntry(i).setPosts(-1);
             }
             else {
                 DecimalFormat format = new DecimalFormat("#.#");
                 double reachEngage = Double.valueOf(format.format((totalEngage
                     / totalViews) * 100));
-                janInfluencers.getEntry(i).setPosts(reachEngage);
+                febInfluencers.getEntry(i).setPosts(reachEngage);
             }
         }
 //        ComparatorER compareER = new ComparatorER();
 //        sortReachQuart(compareER);
-        return janInfluencers;
+        return febInfluencers;
     }
 }
