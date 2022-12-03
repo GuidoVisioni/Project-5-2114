@@ -190,6 +190,11 @@ public class Influencer {
     public int getTotalEngagement() {
         return likes + comments;
     }
+    
+    public void setPosts(double newPosts)
+    {
+        posts = newPosts;
+    }
 
 
     /**

@@ -84,9 +84,30 @@ public class InfluencerCalculator {
      * @param c
      *            comparator
      */
-    public void sort(Comparator<Influencer> c) {
+    public void sortTraditional(Comparator<Influencer> c) {
         for (int i = 0; i < janInfluencers.getLength(); i++) {
 
+            
+            insertInOrderSortHelper(janInfluencers.getEntry(i), janInfluencers,
+                i - 1, c);
+        }
+        for (int j = 0; j < febInfluencers.getLength(); j++) {
+
+            insertInOrderSortHelper(febInfluencers.getEntry(j), febInfluencers,
+                j - 1, c);
+
+        }
+        for (int k = 0; k < marInfluencers.getLength(); k++) {
+
+            insertInOrderSortHelper(marInfluencers.getEntry(k), marInfluencers,
+                k - 1, c);
+        }
+    }
+    
+    public void sortReach(Comparator<Influencer> c) {
+        for (int i = 0; i < janInfluencers.getLength(); i++) {
+
+            
             insertInOrderSortHelper(janInfluencers.getEntry(i), janInfluencers,
                 i - 1, c);
         }
@@ -103,6 +124,13 @@ public class InfluencerCalculator {
         }
     }
 
+    private void assignTraditionalHelper(SinglyLinkedList<Influencer> influencersToAssign)
+    {
+        for(int i = 0; i < influencersToAssign.getLength(); i++)
+        {
+            influencersToAssign.getEntry(i).getEngagementTraditional();
+        }
+    }
 
     private void insertInOrderSortHelper(
         Influencer entry,
@@ -126,9 +154,8 @@ public class InfluencerCalculator {
      * @return
      *         Quarterly traditional engagement rate formatted "#.#"
      */
-    public double[] getTradEngageForQuart() {
+    public SinglyLinkedList<Influencer> getTradEngageForQuart() {
         double tradER = 0;
-        double[] engageRates = null;
         Influencer janMan = null;
         Influencer febMan = null;
         Influencer marMan = null;
@@ -151,7 +178,7 @@ public class InfluencerCalculator {
                 marMan = marInfluencers.getEntry(k);
             }
             if (marMan.getFollowers() == 0) {
-                engageRates[i] = -1;
+                janInfluencers.getEntry(i).setPosts(-1);
             }
             else {
                 tradER = janMan.getTotalEngagement() + febMan
@@ -159,10 +186,12 @@ public class InfluencerCalculator {
                 DecimalFormat format = new DecimalFormat("#.#");
                 double formattedTradER = Double.valueOf(format.format((tradER
                     / marMan.getFollowers()) * 100));
-                engageRates[i] = formattedTradER;
+                janInfluencers.getEntry(i).setPosts(formattedTradER);
             }
         }
-        return engageRates;
+        ComparatorER compareER = new ComparatorER();
+        sortTraditional(compareER);
+        return janInfluencers;
     }
 
 
@@ -188,10 +217,9 @@ public class InfluencerCalculator {
      * @return
      *         Quarterly reach engagement rate formatted "#.#"
      */
-    public double[] getEngageReachForQuart() {
+    public SinglyLinkedList<Influencer> getEngageReachForQuart() {
         double totalEngage = 0;
         double totalViews = 0;
-        double[] engageRates = null;
         Influencer janMan = null;
         Influencer febMan = null;
         Influencer marMan = null;
@@ -217,17 +245,16 @@ public class InfluencerCalculator {
                 .getTotalEngagement() + marMan.getTotalEngagement();
             totalViews = janMan.getViews() + febMan.getViews() + marMan
                 .getViews();
-            if(totalViews == 0)
-            {
-                engageRates[i] = -1;
+            if (totalViews == 0) {
+                janInfluencers.getEntry(i).setPosts(-1);
             }
-            else
-            {
-            DecimalFormat format = new DecimalFormat("#.#");
-            double reachEngage = Double.valueOf(format.format((totalEngage / totalViews) * 100));
-            engageRates[i]  = reachEngage;
+            else {
+                DecimalFormat format = new DecimalFormat("#.#");
+                double reachEngage = Double.valueOf(format.format((totalEngage
+                    / totalViews) * 100));
+                janInfluencers.getEntry(i).setPosts(reachEngage);
             }
         }
-        return engageRates;
+        return janInfluencers;
     }
 }
