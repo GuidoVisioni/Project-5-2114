@@ -183,7 +183,10 @@ public class GUIWindow {
     }
     
     private void updateBars(SinglyLinkedList<Influencer> list) {
-        
-        
+        for (int i = 0; i < list.getLength(); i++) {
+            String barName = list.getEntry(i).getChannelName();
+            double barHeight = list.getEntry(i).getPosts();
+            
+        }
     }
 }
