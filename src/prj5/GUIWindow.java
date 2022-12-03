@@ -93,7 +93,7 @@ public class GUIWindow {
         sortingLabel = new TextShape(1, 41, "Sorting by Engagement Rate");
         window.addShape(sortingLabel);
         
-        rect1 = new Shape(0,0)
+        rect1 = new Shape(0,0);
         rect2 = new Shape(0,0);
         rect3 = new Shape(0,0);
         rect4 = new Shape(0,0);
@@ -196,14 +196,14 @@ public class GUIWindow {
     }
     
     private void updateBars(SinglyLinkedList<Influencer> list) {
-//        window.removeShape(rect1);
-//        window.removeShape(rect2);
-//        window.removeShape(rect3);
-//        window.removeShape(rect4);
-//        window.removeShape(rectLabel1);
-//        window.removeShape(rectLabel2);
-//        window.removeShape(rectLabel3);
-//        window.removeShape(rectLabel4);
+        window.removeShape(rect1);
+        window.removeShape(rect2);
+        window.removeShape(rect3);
+        window.removeShape(rect4);
+        window.removeShape(rectLabel1);
+        window.removeShape(rectLabel2);
+        window.removeShape(rectLabel3);
+        window.removeShape(rectLabel4);
         for (int i = 0; i < list.getLength(); i++) {
             String barName = list.getEntry(i).getChannelName();
             double engage = list.getEntry(i).getPosts();
