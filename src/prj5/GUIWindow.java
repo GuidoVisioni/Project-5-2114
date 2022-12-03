@@ -1,5 +1,6 @@
 package prj5;
 
+import static org.junit.Assert.assertArrayEquals;
 import cs2.Button;
 import cs2.Shape;
 import cs2.TextShape;
@@ -32,6 +33,8 @@ public class GUIWindow {
     private TextShape rectLabel2;
     private TextShape rectLabel3;
     private TextShape rectLabel4;
+    private AList<Shape> bars;
+    private AList<TextShape> barLabels;
     
     /**
      * creates a new GUIWindow object
@@ -89,6 +92,18 @@ public class GUIWindow {
         
         sortingLabel = new TextShape(1, 41, "Sorting by Engagement Rate");
         window.addShape(sortingLabel);
+        
+        bars = new AList<Shape>();
+        bars.add(rect1);
+        bars.add(rect2);
+        bars.add(rect3);
+        bars.add(rect4);
+        
+        barLabels = new AList<TextShape>();
+        bars.add(rectLabel1);
+        bars.add(rectLabel2);
+        bars.add(rectLabel3);
+        bars.add(rectLabel4);
         
         rect1 = new Shape(70, 150, 30, 200);
         window.addShape(rect1);
@@ -167,7 +182,7 @@ public class GUIWindow {
                 .equals("march")) {
                 firstQInf.add(data.getInfluencers().getEntry(entry));
             }
-
+            entry++;
         }
 
     }
@@ -183,18 +198,27 @@ public class GUIWindow {
     }
     
     private void updateBars(SinglyLinkedList<Influencer> list) {
-        window.removeShape(rect1);
-        window.removeShape(rect2);
-        window.removeShape(rect3);
-        window.removeShape(rect4);
-        window.removeShape(rectLabel1);
-        window.removeShape(rectLabel2);
-        window.removeShape(rectLabel3);
-        window.removeShape(rectLabel4);
+//        window.removeShape(rect1);
+//        window.removeShape(rect2);
+//        window.removeShape(rect3);
+//        window.removeShape(rect4);
+//        window.removeShape(rectLabel1);
+//        window.removeShape(rectLabel2);
+//        window.removeShape(rectLabel3);
+//        window.removeShape(rectLabel4);
         for (int i = 0; i < list.getLength(); i++) {
             String barName = list.getEntry(i).getChannelName();
-            double barHeight = list.getEntry(i).getPosts();
-            
+            double engage = list.getEntry(i).getPosts();
+            int height = (int)engage * 15; 
+            Shape rect = new Shape(70 * (i+1), 350 - height, 30, height);
+            bars.replace(i, rect);
+            TextShape rectLabel = new 
+                TextShape(70 * (i + 1), 360 - height, barName + engage);
+            barLabels.replace(i, rectLabel);
+        }
+        for (int j = 0; j < bars.getLength(); j++) {
+            window.addShape(bars.getEntry(j));
+            window.addShape(barLabels.getEntry(j));
         }
     }
 }
