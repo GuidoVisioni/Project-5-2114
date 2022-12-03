@@ -109,14 +109,14 @@ public class GUIWindow {
     public void clickedSortName(Button button) {
         sortingLabel.setText("Sorting by Channel Name");
         ComparatorAlphabetical c = new ComparatorAlphabetical();
-        data.sort(c);
+       // data.sort(c);
     }
 
 
     public void clickedSortEngagement(Button button) {
         sortingLabel.setText("Sorting by Engagement Rate");
         ComparatorER c = new ComparatorER();
-        data.sort(c);
+      //  data.sort(c);
     }
 
 
@@ -183,6 +183,14 @@ public class GUIWindow {
     }
     
     private void updateBars(SinglyLinkedList<Influencer> list) {
+        window.removeShape(rect1);
+        window.removeShape(rect2);
+        window.removeShape(rect3);
+        window.removeShape(rect4);
+        window.removeShape(rectLabel1);
+        window.removeShape(rectLabel2);
+        window.removeShape(rectLabel3);
+        window.removeShape(rectLabel4);
         for (int i = 0; i < list.getLength(); i++) {
             String barName = list.getEntry(i).getChannelName();
             double barHeight = list.getEntry(i).getPosts();
