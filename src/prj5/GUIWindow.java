@@ -174,7 +174,7 @@ public class GUIWindow {
                 updateBars(data.getJanInfluencers());
             }
         }
-        if (engagementType.getText().contains("Traditional")) {
+        else if (engagementType.getText().contains("Traditional")) {
             data.sortTraditional(c);
         }
         else {

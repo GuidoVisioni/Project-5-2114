@@ -17,7 +17,7 @@ public class Input {
         }
         else
         {
-            InfluencerReader reader = new InfluencerReader("SampleInput2_2022.csv");
+            InfluencerReader reader = new InfluencerReader("SampleInput1_2022.csv");
         }
     }
 }
