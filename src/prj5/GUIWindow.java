@@ -1,6 +1,7 @@
 package prj5;
 
 import static org.junit.Assert.assertArrayEquals;
+import java.util.Comparator;
 import cs2.Button;
 import cs2.Shape;
 import cs2.TextShape;
@@ -114,7 +115,7 @@ public class GUIWindow {
         barLabels.add(rectLabel2);
         barLabels.add(rectLabel3);
         barLabels.add(rectLabel4);
-        
+
         ComparatorER c = new ComparatorER();
         data.sortTraditional(c);
         updateBars(data.getJanInfluencers());
@@ -128,7 +129,12 @@ public class GUIWindow {
     public void clickedSortName(Button button) {
         sortingLabel.setText("Sorting by Channel Name");
         ComparatorAlphabetical c = new ComparatorAlphabetical();
-        data.sortTraditional(c);
+        if (engagementType.getText().contains("Traditional")) {
+            data.sortTraditional(c);
+        }
+        else {
+            data.sortReach(c);
+        }
         if (timePeriod.equals("january")) {
             updateBars(data.getJanInfluencers());
         }
@@ -137,6 +143,16 @@ public class GUIWindow {
         }
         else if (timePeriod.equals("march")) {
             updateBars(data.getMarInfluencers());
+        }
+        else if (timePeriod.equals("quarter")) {
+            if (engagementType.getText().contains("Traditional")) {
+                data.getTradEngageForQuart();
+                updateBars(data.getJanInfluencers());
+            }
+              else {
+                  data.getEngageReachForQuart();
+                  updateBars(data.getJanInfluencers());
+              }
         }
     }
 
@@ -159,6 +175,16 @@ public class GUIWindow {
         else if (timePeriod.equals("march")) {
             updateBars(data.getMarInfluencers());
         }
+        else if (timePeriod.equals("quarter")) {
+            if (engagementType.getText().contains("Traditional")) {
+                data.getTradEngageForQuart();
+                updateBars(data.getJanInfluencers());
+            }
+              else {
+                  data.getEngageReachForQuart();
+                  updateBars(data.getJanInfluencers());
+              }
+        }
     }
 
 
@@ -169,54 +195,58 @@ public class GUIWindow {
 
     public void clickedTradEngage(Button button) {
         engagementType.setText("Traditional Engagement Rate");
+        Comparator<Influencer> c;
         if (sortingLabel.getText().contains("Channel")) {
-            ComparatorAlphabetical c = new ComparatorAlphabetical();
-            data.sortTraditional(c);
+            c = new ComparatorAlphabetical();
         }
         else {
-            ComparatorER c = new ComparatorER();
-            data.sortTraditional(c);
+            c = new ComparatorER();
         }
         if (timePeriod.equals("january")) {
+            data.sortTraditional(c);
             updateBars(data.getJanInfluencers());
         }
         else if (timePeriod.equals("february")) {
+            data.sortTraditional(c);
             updateBars(data.getFebInfluencers());
         }
         else if (timePeriod.equals("march")) {
+            data.sortTraditional(c);
             updateBars(data.getMarInfluencers());
+        }
+        else if (timePeriod.equals("quarter")) {
+            data.getTradEngageForQuart();
+            data.sortTraditionalQuart(c);
+            updateBars(data.getJanInfluencers());
         }
     }
 
 
     public void clickedReachEngage(Button button) {
         engagementType.setText("Reach Engagement Rate");
+        Comparator<Influencer> c;
         if (sortingLabel.getText().contains("Channel")) {
-            ComparatorAlphabetical c = new ComparatorAlphabetical();
-            data.sortTraditional(c);
-
-            if (timePeriod.equals("january")) {
-                data.assignReachHelper(data.getJanInfluencers());
-            }
-            else if (timePeriod.equals("february")) {
-                data.assignReachHelper(data.getFebInfluencers());
-            }
-            else if (timePeriod.equals("march")) {
-                data.assignReachHelper(data.getMarInfluencers());
-            }
+            c = new ComparatorAlphabetical();
         }
         else {
-            ComparatorER c = new ComparatorER();
-            data.sortReach(c);
+            c = new ComparatorER();
         }
         if (timePeriod.equals("january")) {
+            data.sortReach(c);
             updateBars(data.getJanInfluencers());
         }
         else if (timePeriod.equals("february")) {
+            data.sortReach(c);
             updateBars(data.getFebInfluencers());
         }
         else if (timePeriod.equals("march")) {
+            data.sortReach(c);
             updateBars(data.getMarInfluencers());
+        }
+        else if (timePeriod.equals("quarter")) {
+            data.getEngageReachForQuart();
+            data.sortReachQuart(c);
+            updateBars(data.getJanInfluencers());
         }
     }
 
@@ -226,6 +256,25 @@ public class GUIWindow {
         if (month.equals("january")) {
             timeFrame.setText("January");
             timePeriod = "january";
+            Comparator<Influencer> c;
+            if (sortingLabel.getText().contains("Channel")) {
+                c = new ComparatorAlphabetical();
+                if (engagementType.getText().contains("Traditional")) {
+                    data.sortTraditional(c);
+                }
+                else {
+                    data.sortReach(c);
+                }
+            }
+            else {
+                c = new ComparatorER();
+                if (engagementType.getText().contains("Traditional")) {
+                    data.sortTraditional(c);
+                }
+                else {
+                    data.sortReach(c);
+                }
+            }
             updateBars(data.getJanInfluencers());
         }
         else if (month.equals("february")) {
@@ -243,26 +292,35 @@ public class GUIWindow {
 
     public void clickedQuarter(Button button) {
         timeFrame.setText("First Quarter (Jan - March)");
-        if (engagementType.getText().contains("Traditional")) {
-            data.getTradEngageForQuart();
+        timePeriod = "quarter";
+        Comparator<Influencer> c;
+        if (sortingLabel.getText().contains("Channel")) {
+            c = new ComparatorAlphabetical();
+            if (engagementType.getText().contains("Traditional")) {
+              data.getTradEngageForQuart();
+              data.sortTraditionalQuart(c);
+              updateBars(data.getJanInfluencers());
+          }
+            else {
+                data.getEngageReachForQuart();
+                data.sortReachQuart(c);
+                updateBars(data.getJanInfluencers());
+            }
         }
         else {
-            data.getEngageReachForQuart();
+            c = new ComparatorER();
+            if (engagementType.getText().contains("Traditional")) {
+                data.getTradEngageForQuart();
+                data.sortTraditionalQuart(c);
+                updateBars(data.getJanInfluencers());
+            }
+              else {
+                  data.getEngageReachForQuart();
+                  data.sortReachQuart(c);
+                  updateBars(data.getJanInfluencers());
+              }
         }
-        timePeriod = "quarter";
-        updateBars(data.getJanInfluencers());
     }
-
-
-    private String[] clickedDifferentMonths() {
-        return null;
-    }
-
-
-    private SinglyLinkedList<Influencer> getDataForMonth(String month) {
-        return null;
-    }
-
 
     private void updateBars(SinglyLinkedList<Influencer> list) {
         for (int k = 0; k < 4; k++) {
@@ -277,12 +335,12 @@ public class GUIWindow {
             bars.replace(i, rect);
             TextShape rectLabel;
             if (engage == -1.0) {
-                rectLabel = new TextShape(180 * (i + 1), 300, barName
-                    + "  " + "N/A");
+                rectLabel = new TextShape(180 * (i + 1), 300, barName + "  "
+                    + "N/A");
             }
             else {
-                rectLabel = new TextShape(180 * (i + 1), 300, barName
-                    + "  " + engage);
+                rectLabel = new TextShape(180 * (i + 1), 300, barName + "  "
+                    + engage);
             }
             barLabels.replace(i, rectLabel);
         }

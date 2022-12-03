@@ -124,6 +124,46 @@ public class InfluencerCalculator {
     }
 
 
+    /**
+     * Sorts the linked list
+     * 
+     * @param c
+     *            comparator
+     */
+    public void sortTraditionalQuart(Comparator<Influencer> c) {
+        for (int i = 0; i < janInfluencers.getLength(); i++) {
+            insertInOrderSortHelper(janInfluencers.getEntry(i), janInfluencers,
+                i - 1, c);
+        }
+        for (int j = 0; j < febInfluencers.getLength(); j++) {
+            insertInOrderSortHelper(febInfluencers.getEntry(j), febInfluencers,
+                j - 1, c);
+
+        }
+        for (int k = 0; k < marInfluencers.getLength(); k++) {
+            insertInOrderSortHelper(marInfluencers.getEntry(k), marInfluencers,
+                k - 1, c);
+        }
+    }
+
+
+    public void sortReachQuart(Comparator<Influencer> c) {
+        for (int i = 0; i < janInfluencers.getLength(); i++) {
+            insertInOrderSortHelper(janInfluencers.getEntry(i), janInfluencers,
+                i - 1, c);
+        }
+        for (int j = 0; j < febInfluencers.getLength(); j++) {
+            insertInOrderSortHelper(febInfluencers.getEntry(j), febInfluencers,
+                j - 1, c);
+
+        }
+        for (int k = 0; k < marInfluencers.getLength(); k++) {
+            insertInOrderSortHelper(marInfluencers.getEntry(k), marInfluencers,
+                k - 1, c);
+        }
+    }
+
+
     public void assignTraditionalHelper(
         SinglyLinkedList<Influencer> influencersToAssign) {
         for (int i = 0; i < influencersToAssign.getLength(); i++) {
@@ -180,14 +220,12 @@ public class InfluencerCalculator {
             for (int j = 0; j < febInfluencers.getLength(); j++) {
                 if (febInfluencers.getEntry(j).getChannelName().toLowerCase()
                     .equals(name))
-                    ;
-                febMan = febInfluencers.getEntry(j);
+                    febMan = febInfluencers.getEntry(j);
             }
             for (int k = 0; k < marInfluencers.getLength(); k++) {
                 if (marInfluencers.getEntry(k).getChannelName().toLowerCase()
                     .equals(name))
-                    ;
-                marMan = marInfluencers.getEntry(k);
+                    marMan = marInfluencers.getEntry(k);
             }
             if (marMan.getFollowers() == 0) {
                 janInfluencers.getEntry(i).setPosts(-1);
@@ -201,8 +239,8 @@ public class InfluencerCalculator {
                 janInfluencers.getEntry(i).setPosts(formattedTradER);
             }
         }
-        ComparatorER compareER = new ComparatorER();
-        sortTraditional(compareER);
+//        ComparatorER compareER = new ComparatorER();
+//        sortTraditionalQuart(compareER);
         return janInfluencers;
     }
 
@@ -267,8 +305,8 @@ public class InfluencerCalculator {
                 janInfluencers.getEntry(i).setPosts(reachEngage);
             }
         }
-        ComparatorER compareER = new ComparatorER();
-        sortReach(compareER);
+//        ComparatorER compareER = new ComparatorER();
+//        sortReachQuart(compareER);
         return janInfluencers;
     }
 }
