@@ -1,6 +1,7 @@
 package prj5;
 
 import static org.junit.Assert.assertArrayEquals;
+import java.awt.Color;
 import java.util.Comparator;
 import cs2.Button;
 import cs2.Shape;
@@ -8,6 +9,7 @@ import cs2.TextShape;
 import cs2.Window;
 import cs2.WindowSide;
 import list.AList;
+import student.TestableRandom;
 
 public class GUIWindow {
 
@@ -36,6 +38,7 @@ public class GUIWindow {
     private TextShape rectLabel4;
     private AList<Shape> bars;
     private AList<TextShape> barLabels;
+    private AList<Color> colors;
 
     /**
      * creates a new GUIWindow object
@@ -115,6 +118,15 @@ public class GUIWindow {
         barLabels.add(rectLabel2);
         barLabels.add(rectLabel3);
         barLabels.add(rectLabel4);
+        
+        colors = new AList<Color>();
+        for (int i = 0; i < bars.getLength(); i++) {
+            TestableRandom randomGenerator = new TestableRandom();
+            int r = randomGenerator.nextInt(255);
+            int g = randomGenerator.nextInt(255);
+            int b = randomGenerator.nextInt(255);
+            colors.add(new Color(r, g, b));
+        }
 
         ComparatorER c = new ComparatorER();
         data.sortTraditional(c);
@@ -347,15 +359,18 @@ public class GUIWindow {
             double engage = list.getEntry(i).getPosts();
             int height = (int)Math.round(engage);
             Shape rect = new Shape(180 * (i + 1), 300 - height, 30, height);
+            rect.setBackgroundColor(colors.getEntry(i));
             bars.replace(i, rect);
+            
+
             TextShape rectLabel;
             if (engage == -1.0) {
-                rectLabel = new TextShape(180 * (i + 1), 300, barName + "  "
-                    + "N/A");
+                rectLabel = new TextShape(180 * (i + 1), 300, barName
+                    + "  " + "N/A");
             }
             else {
-                rectLabel = new TextShape(180 * (i + 1), 300, barName + "  "
-                    + engage);
+                rectLabel = new TextShape(180 * (i + 1), 300, barName
+                    + "\n" + engage);
             }
             barLabels.replace(i, rectLabel);
         }
