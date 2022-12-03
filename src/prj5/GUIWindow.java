@@ -129,12 +129,24 @@ public class GUIWindow {
     public void clickedSortName(Button button) {
         sortingLabel.setText("Sorting by Channel Name");
         ComparatorAlphabetical c = new ComparatorAlphabetical();
-        if (engagementType.getText().contains("Traditional")) {
+
+        if (timePeriod.equals("quarter")) {
+            if (engagementType.getText().contains("Traditional")) {
+                data.sortTraditionalQuart(c);
+                updateBars(data.getJanInfluencers());
+            }
+            else {
+                data.sortReachQuart(c);
+                updateBars(data.getJanInfluencers());
+            }
+        }
+        else if (engagementType.getText().contains("Traditional")) {
             data.sortTraditional(c);
         }
         else {
             data.sortReach(c);
         }
+        
         if (timePeriod.equals("january")) {
             updateBars(data.getJanInfluencers());
         }
@@ -144,23 +156,25 @@ public class GUIWindow {
         else if (timePeriod.equals("march")) {
             updateBars(data.getMarInfluencers());
         }
-        else if (timePeriod.equals("quarter")) {
-            if (engagementType.getText().contains("Traditional")) {
-                data.getTradEngageForQuart();
-                updateBars(data.getJanInfluencers());
-            }
-              else {
-                  data.getEngageReachForQuart();
-                  updateBars(data.getJanInfluencers());
-              }
-        }
+
     }
 
 
     public void clickedSortEngagement(Button button) {
         sortingLabel.setText("Sorting by Engagement Rate");
         ComparatorER c = new ComparatorER();
-        if (engagementType.getText().contains("Traditional")) {
+        
+        if (timePeriod.equals("quarter")) {
+            if (engagementType.getText().contains("Traditional")) {
+                data.sortTraditionalQuart(c);
+                updateBars(data.getJanInfluencers());
+            }
+            else {
+                data.sortReachQuart(c);
+                updateBars(data.getJanInfluencers());
+            }
+        }
+        else if (engagementType.getText().contains("Traditional")) {
             data.sortTraditional(c);
         }
         else {
@@ -180,10 +194,10 @@ public class GUIWindow {
                 data.getTradEngageForQuart();
                 updateBars(data.getJanInfluencers());
             }
-              else {
-                  data.getEngageReachForQuart();
-                  updateBars(data.getJanInfluencers());
-              }
+            else {
+                data.getEngageReachForQuart();
+                updateBars(data.getJanInfluencers());
+            }
         }
     }
 
@@ -297,10 +311,10 @@ public class GUIWindow {
         if (sortingLabel.getText().contains("Channel")) {
             c = new ComparatorAlphabetical();
             if (engagementType.getText().contains("Traditional")) {
-              data.getTradEngageForQuart();
-              data.sortTraditionalQuart(c);
-              updateBars(data.getJanInfluencers());
-          }
+                data.getTradEngageForQuart();
+                data.sortTraditionalQuart(c);
+                updateBars(data.getJanInfluencers());
+            }
             else {
                 data.getEngageReachForQuart();
                 data.sortReachQuart(c);
@@ -314,13 +328,14 @@ public class GUIWindow {
                 data.sortTraditionalQuart(c);
                 updateBars(data.getJanInfluencers());
             }
-              else {
-                  data.getEngageReachForQuart();
-                  data.sortReachQuart(c);
-                  updateBars(data.getJanInfluencers());
-              }
+            else {
+                data.getEngageReachForQuart();
+                data.sortReachQuart(c);
+                updateBars(data.getJanInfluencers());
+            }
         }
     }
+
 
     private void updateBars(SinglyLinkedList<Influencer> list) {
         for (int k = 0; k < 4; k++) {
