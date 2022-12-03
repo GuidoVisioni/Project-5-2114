@@ -122,6 +122,39 @@ public class InfluencerCalculator {
                 k - 1, c);
         }
     }
+    
+    public void sortTraditionalQuart(Comparator<Influencer> c) {
+        for (int i = 0; i < janInfluencers.getLength(); i++) {
+            insertInOrderSortHelper(janInfluencers.getEntry(i), janInfluencers,
+                i - 1, c);
+        }
+        for (int j = 0; j < febInfluencers.getLength(); j++) {
+            insertInOrderSortHelper(febInfluencers.getEntry(j), febInfluencers,
+                j - 1, c);
+
+        }
+        for (int k = 0; k < marInfluencers.getLength(); k++) {
+            insertInOrderSortHelper(marInfluencers.getEntry(k), marInfluencers,
+                k - 1, c);
+        }
+    }
+
+
+    public void sortReachQuart(Comparator<Influencer> c) {
+        for (int i = 0; i < janInfluencers.getLength(); i++) {
+            insertInOrderSortHelper(janInfluencers.getEntry(i), janInfluencers,
+                i - 1, c);
+        }
+        for (int j = 0; j < febInfluencers.getLength(); j++) {
+            insertInOrderSortHelper(febInfluencers.getEntry(j), febInfluencers,
+                j - 1, c);
+
+        }
+        for (int k = 0; k < marInfluencers.getLength(); k++) {
+            insertInOrderSortHelper(marInfluencers.getEntry(k), marInfluencers,
+                k - 1, c);
+        }
+    }
 
 
     public void assignTraditionalHelper(
