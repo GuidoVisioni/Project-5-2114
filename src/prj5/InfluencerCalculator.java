@@ -86,51 +86,63 @@ public class InfluencerCalculator {
      */
     public void sortTraditional(Comparator<Influencer> c) {
         for (int i = 0; i < janInfluencers.getLength(); i++) {
-
-            
+            assignTraditionalHelper(janInfluencers);
             insertInOrderSortHelper(janInfluencers.getEntry(i), janInfluencers,
                 i - 1, c);
         }
         for (int j = 0; j < febInfluencers.getLength(); j++) {
-
+            assignTraditionalHelper(febInfluencers);
             insertInOrderSortHelper(febInfluencers.getEntry(j), febInfluencers,
                 j - 1, c);
 
         }
         for (int k = 0; k < marInfluencers.getLength(); k++) {
-
+            assignTraditionalHelper(marInfluencers);
             insertInOrderSortHelper(marInfluencers.getEntry(k), marInfluencers,
                 k - 1, c);
         }
     }
-    
+
+
     public void sortReach(Comparator<Influencer> c) {
         for (int i = 0; i < janInfluencers.getLength(); i++) {
-
-            
+            assignReachHelper(janInfluencers);
             insertInOrderSortHelper(janInfluencers.getEntry(i), janInfluencers,
                 i - 1, c);
         }
         for (int j = 0; j < febInfluencers.getLength(); j++) {
-
+            assignReachHelper(febInfluencers);
             insertInOrderSortHelper(febInfluencers.getEntry(j), febInfluencers,
                 j - 1, c);
 
         }
         for (int k = 0; k < marInfluencers.getLength(); k++) {
-
+            assignReachHelper(marInfluencers);
             insertInOrderSortHelper(marInfluencers.getEntry(k), marInfluencers,
                 k - 1, c);
         }
     }
 
-    private void assignTraditionalHelper(SinglyLinkedList<Influencer> influencersToAssign)
-    {
-        for(int i = 0; i < influencersToAssign.getLength(); i++)
-        {
-            influencersToAssign.getEntry(i).getEngagementTraditional();
+
+    private void assignTraditionalHelper(
+        SinglyLinkedList<Influencer> influencersToAssign) {
+        for (int i = 0; i < influencersToAssign.getLength(); i++) {
+            double traditionalEngagementRate = influencersToAssign.getEntry(i)
+                .getEngagementTraditional();
+            influencersToAssign.getEntry(i).setPosts(traditionalEngagementRate);
         }
     }
+
+
+    private void assignReachHelper(
+        SinglyLinkedList<Influencer> influencersToAssign) {
+        for (int i = 0; i < influencersToAssign.getLength(); i++) {
+            double reachEngagementRate = influencersToAssign.getEntry(i)
+                .getEngagementReach();
+            influencersToAssign.getEntry(i).setPosts(reachEngagementRate);
+        }
+    }
+
 
     private void insertInOrderSortHelper(
         Influencer entry,
