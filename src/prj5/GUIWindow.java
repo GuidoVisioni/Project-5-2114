@@ -93,6 +93,16 @@ public class GUIWindow {
         sortingLabel = new TextShape(1, 41, "Sorting by Engagement Rate");
         window.addShape(sortingLabel);
         
+        rect1 = new Shape(0,0)
+        rect2 = new Shape(0,0);
+        rect3 = new Shape(0,0);
+        rect4 = new Shape(0,0);
+        
+        rectLabel1 = new TextShape(0,0, "");
+        rectLabel2 = new TextShape(0,0, "");
+        rectLabel3 = new TextShape(0,0, "");
+        rectLabel4 = new TextShape(0,0, "");
+        
         bars = new AList<Shape>();
         bars.add(rect1);
         bars.add(rect2);
@@ -104,18 +114,6 @@ public class GUIWindow {
         bars.add(rectLabel2);
         bars.add(rectLabel3);
         bars.add(rectLabel4);
-        
-        rect1 = new Shape(70, 150, 30, 200);
-        window.addShape(rect1);
-        
-        rect2 = new Shape(140, 220, 30, 130);
-        window.addShape(rect2);
-        
-        rect3 = new Shape(210, 250, 30, 100);
-        window.addShape(rect3);
-        
-        rect4 = new Shape(280, 273, 30, 77);
-        window.addShape(rect4);
     }
 
     // If traditional engagement rate or reach engagement rate from the
