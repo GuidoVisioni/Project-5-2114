@@ -124,7 +124,7 @@ public class InfluencerCalculator {
     }
 
 
-    private void assignTraditionalHelper(
+    public void assignTraditionalHelper(
         SinglyLinkedList<Influencer> influencersToAssign) {
         for (int i = 0; i < influencersToAssign.getLength(); i++) {
             double traditionalEngagementRate = influencersToAssign.getEntry(i)
@@ -134,7 +134,7 @@ public class InfluencerCalculator {
     }
 
 
-    private void assignReachHelper(
+    public void assignReachHelper(
         SinglyLinkedList<Influencer> influencersToAssign) {
         for (int i = 0; i < influencersToAssign.getLength(); i++) {
             double reachEngagementRate = influencersToAssign.getEntry(i)

@@ -35,7 +35,7 @@ public class GUIWindow {
     private TextShape rectLabel4;
     private AList<Shape> bars;
     private AList<TextShape> barLabels;
-    
+
     /**
      * creates a new GUIWindow object
      * 
@@ -83,41 +83,47 @@ public class GUIWindow {
         quarterButton = new Button("First Quarter (Jan - March)");
         quarterButton.onClick(this, "clickedQuarter");
         window.addButton(quarterButton, WindowSide.SOUTH);
-        
+
         timeFrame = new TextShape(1, 1, "January");
         window.addShape(timeFrame);
 
         engagementType = new TextShape(1, 21, "Traditional Engagement Rate");
         window.addShape(engagementType);
-        
+
         sortingLabel = new TextShape(1, 41, "Sorting by Engagement Rate");
         window.addShape(sortingLabel);
-        
-        rect1 = new Shape(0,0);
-        rect2 = new Shape(0,0);
-        rect3 = new Shape(0,0);
-        rect4 = new Shape(0,0);
-        
-        rectLabel1 = new TextShape(0,0, "");
-        rectLabel2 = new TextShape(0,0, "");
-        rectLabel3 = new TextShape(0,0, "");
-        rectLabel4 = new TextShape(0,0, "");
-        
+
+        rect1 = new Shape(0, 0);
+        rect2 = new Shape(0, 0);
+        rect3 = new Shape(0, 0);
+        rect4 = new Shape(0, 0);
+
+        rectLabel1 = new TextShape(0, 0, "");
+        rectLabel2 = new TextShape(0, 0, "");
+        rectLabel3 = new TextShape(0, 0, "");
+        rectLabel4 = new TextShape(0, 0, "");
+
         bars = new AList<Shape>();
         bars.add(rect1);
         bars.add(rect2);
         bars.add(rect3);
         bars.add(rect4);
-        
+
         barLabels = new AList<TextShape>();
         barLabels.add(rectLabel1);
         barLabels.add(rectLabel2);
         barLabels.add(rectLabel3);
         barLabels.add(rectLabel4);
+        
+        ComparatorER c = new ComparatorER();
+        data.sortTraditional(c);
+        updateBars(data.getJanInfluencers());
+        timePeriod = "january";
     }
 
     // If traditional engagement rate or reach engagement rate from the
     // influencer class return -1 then depict N/A for those values on the GUI
+
 
     public void clickedSortName(Button button) {
         sortingLabel.setText("Sorting by Channel Name");
@@ -137,6 +143,13 @@ public class GUIWindow {
 
     public void clickedSortEngagement(Button button) {
         sortingLabel.setText("Sorting by Engagement Rate");
+        ComparatorER c = new ComparatorER();
+        if (engagementType.getText().contains("Traditional")) {
+            data.sortTraditional(c);
+        }
+        else {
+            data.sortReach(c);
+        }
         if (timePeriod.equals("january")) {
             updateBars(data.getJanInfluencers());
         }
@@ -156,8 +169,14 @@ public class GUIWindow {
 
     public void clickedTradEngage(Button button) {
         engagementType.setText("Traditional Engagement Rate");
-        ComparatorER c = new ComparatorER();
-        data.sortTraditional(c);
+        if (sortingLabel.getText().contains("Channel")) {
+            ComparatorAlphabetical c = new ComparatorAlphabetical();
+            data.sortTraditional(c);
+        }
+        else {
+            ComparatorER c = new ComparatorER();
+            data.sortTraditional(c);
+        }
         if (timePeriod.equals("january")) {
             updateBars(data.getJanInfluencers());
         }
@@ -172,8 +191,24 @@ public class GUIWindow {
 
     public void clickedReachEngage(Button button) {
         engagementType.setText("Reach Engagement Rate");
-        ComparatorER c = new ComparatorER();
-        data.sortReach(c);
+        if (sortingLabel.getText().contains("Channel")) {
+            ComparatorAlphabetical c = new ComparatorAlphabetical();
+            data.sortTraditional(c);
+
+            if (timePeriod.equals("january")) {
+                data.assignReachHelper(data.getJanInfluencers());
+            }
+            else if (timePeriod.equals("february")) {
+                data.assignReachHelper(data.getFebInfluencers());
+            }
+            else if (timePeriod.equals("march")) {
+                data.assignReachHelper(data.getMarInfluencers());
+            }
+        }
+        else {
+            ComparatorER c = new ComparatorER();
+            data.sortReach(c);
+        }
         if (timePeriod.equals("january")) {
             updateBars(data.getJanInfluencers());
         }
@@ -185,7 +220,7 @@ public class GUIWindow {
         }
     }
 
-    
+
     public void clickedMonth(Button button) {
         String month = button.getTitle().toLowerCase();
         if (month.equals("january")) {
@@ -208,21 +243,14 @@ public class GUIWindow {
 
     public void clickedQuarter(Button button) {
         timeFrame.setText("First Quarter (Jan - March)");
+        if (engagementType.getText().contains("Traditional")) {
+            data.getTradEngageForQuart();
+        }
+        else {
+            data.getEngageReachForQuart();
+        }
         timePeriod = "quarter";
-        
-//        SinglyLinkedList<Influencer> firstQInf =
-//            new SinglyLinkedList<Influencer>();
-//        int entry = 0;
-//        while (entry != data.getInfluencers().getLength()) {
-//            String time = data.getInfluencers().getEntry(entry).getMonth()
-//                .toLowerCase();
-//            if (time.equals("january") || time.equals("february") || time
-//                .equals("march")) {
-//                firstQInf.add(data.getInfluencers().getEntry(entry));
-//            }
-//            entry++;
-//        }
-
+        updateBars(data.getJanInfluencers());
     }
 
 
@@ -234,7 +262,8 @@ public class GUIWindow {
     private SinglyLinkedList<Influencer> getDataForMonth(String month) {
         return null;
     }
-    
+
+
     private void updateBars(SinglyLinkedList<Influencer> list) {
         for (int k = 0; k < 4; k++) {
             window.removeShape(bars.getEntry(k));
@@ -243,12 +272,18 @@ public class GUIWindow {
         for (int i = 0; i < list.getLength(); i++) {
             String barName = list.getEntry(i).getChannelName();
             double engage = list.getEntry(i).getPosts();
-            System.out.println(engage);
             int height = (int)Math.round(engage);
-            Shape rect = new Shape(70 * (i+1), 200 - height, 30, height);
+            Shape rect = new Shape(180 * (i + 1), 300 - height, 30, height);
             bars.replace(i, rect);
-            TextShape rectLabel = new 
-                TextShape(70 * (i + 1), 200 - height, barName + engage);
+            TextShape rectLabel;
+            if (engage == -1.0) {
+                rectLabel = new TextShape(180 * (i + 1), 300, barName
+                    + "  " + "N/A");
+            }
+            else {
+                rectLabel = new TextShape(180 * (i + 1), 300, barName
+                    + "  " + engage);
+            }
             barLabels.replace(i, rectLabel);
         }
         for (int j = 0; j < 4; j++) {
